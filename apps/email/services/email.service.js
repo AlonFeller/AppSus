@@ -1,5 +1,5 @@
 import { storageService } from '../../../services/storage.service.js'
-
+import { utilService } from '../../../services/util.service.js'
 
 export const emailService = {
     getById,
@@ -55,11 +55,12 @@ function getById(emailId) {
 function _creatEmails(){
     const emails = []
     emails.push(_creatEmail())
+    return emails
 }
 
 function _creatEmail() {
     const email = {
-        id: 'e101',
+        id: utilService.makeId(),
         subject: 'Miss you!',
         body: 'Would love to catch up sometimes',
         isRead: false,
