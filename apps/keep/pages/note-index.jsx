@@ -1,5 +1,5 @@
 import { NoteService } from '../services/note.service.js'
-
+import { NotePreview } from '../cmps/note-preview.jsx'
 import { NoteList } from '../cmps/note-list.jsx'
 import { NoteFilter } from '../cmps/note-filter.jsx'
 
@@ -36,12 +36,14 @@ export class KeepApp extends React.Component {
             <h1>there's nothing here go away</h1>
             <section className="notes-container">
                 {notes.map(note => {
-                    return <div className="note-card flex" key={note.id}>
+                    return <div className="note-card flex" key={note.id}
+                    // onClick = { NotePreview(note) } 
+                    >
                         <div>{`type: ${note.type}`}</div>
-                        <p>{note.desc}</p>
+                        <p>{note.info.desc}</p>
                     </div>
                 })}
             </section>
-        </section>
+        </section >
     }
 }

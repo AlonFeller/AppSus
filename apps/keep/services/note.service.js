@@ -81,10 +81,18 @@ function _createNote(type) {
     let note = {
         id: utilService.makeId(),
         type,
+        info: {},
         isPinned: (utilService.getRandomIntInclusive(0, 10) > 5) ? true : false,
 
     }
-    if (type === 'txt') note.desc = utilService.makeLorem(25)
+    if (type === 'txt') note.info.desc = utilService.makeLorem(25)
+    if (type === 'img') {
+        note.info = {
+            url: `../../../assets/img/${utilService.getRandomIntInclusive(1 , 5)}.jpg`,
+            title: utilService.makeLorem(3)
+        }
+    }
+
     return note
 }
 
