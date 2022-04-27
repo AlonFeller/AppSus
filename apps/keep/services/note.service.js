@@ -33,7 +33,7 @@ function query(filterBy) {
     return Promise.resolve(Notes)
 }
 
-function getNextCarId(noteId) {
+function getNextNoteId(noteId) {
     const notes = _loadFromStorage()
     const noteIdx = notes.findIndex(note => noteId === note.id)
     const nextNoteIdx = (noteIdx + 1 === notes.length) ? 0 : noteIdx + 1

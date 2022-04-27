@@ -1,22 +1,37 @@
-const { link } = ReactRouterDOM
+import { noteService } from '../services/note.service.js'
+
+import { NoteList } from '../cmps/note-list.jsx'
+import { NoteFilter } from '../cmps/note-filter.jsx'
+
+const { Link } = ReactRouterDOM
 
 
-export function KeepApp() {
+export class KeepApp extends React.Component {
+    state = {
+        notes: [],
+        filterBy: null
+    }
 
 
-    console.log('B*** its Keeps! I\'m working here!');
+    componentDidMount() {
+        this.loadNotes()
+    }
 
+    loadNotes = () => {
+        noteService.query(this.state.filterBy)
+            .then(notes => this.setState({ notes }))
+    }
 
+    onSetFilter = (filterBy) => {
+        this.setState({ filterBy }, this.loadNotes)
+    }
 
-    return <section className="keeps">
-        <div className="search-bar">
-            {/* <input type="text" placeholder="Search"> */}
-        </div>
-        <div className="label-side-bar">
-
-        </div>
-        <section className="cards-container">
-
+    render() {
+        const { notes } = this.state
+        return <section className="keep-app">
+            <Link to="/keep/note/edit"><button>Add note</button></Link>
+            <NoteFilter onSetFilter={this.onSetFilter} history={this.props.history} />
+            <NoteList notes={notes} onSelectNote={this.onSelectNote} />
         </section>
-    </section>
+    }
 }
