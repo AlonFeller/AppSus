@@ -39,6 +39,7 @@ export class CarDetails extends React.Component {
         const { car: note } = this.state
         if (!note) return <div>Loading..</div>
         const nextNoteId = noteService.getNextNoteId(note.id)
+        console.log('i was here');
         return <section className="note-details">
             Hello from note details
             {/* <h3>type : {note.type}</h3>

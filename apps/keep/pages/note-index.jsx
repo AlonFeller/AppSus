@@ -1,4 +1,4 @@
-import { noteService } from '../services/note.service.js'
+import { NoteService } from '../services/note.service.js'
 
 import { NoteList } from '../cmps/note-list.jsx'
 import { NoteFilter } from '../cmps/note-filter.jsx'
@@ -13,26 +13,35 @@ export class KeepApp extends React.Component {
     }
 
 
-    // componentDidMount() {
-    //     this.loadNotes()
-    // }
+    componentDidMount() {
+        console.log('Im on it hold your breath');
+        this.loadNotes()
+    }
 
-    // loadNotes = () => {
-    //     noteService.query(this.state.filterBy)
-    //         .then(notes => this.setState({ notes }))
-    // }
+    loadNotes = () => {
+        console.log('just hold on');
+        NoteService.query(this.state.filterBy)
+            .then(notes => this.setState({ notes }))
+    }
 
-    // onSetFilter = (filterBy) => {
-    //     this.setState({ filterBy }, this.loadNotes)
-    // }
+    onSetFilter = (filterBy) => {
+        this.setState({ filterBy }, this.loadNotes)
+    }
 
     render() {
         const { notes } = this.state
+        console.log(notes);
+        console.log('well ? you happy now?');
         return <section className="keep-app">
-            <h1>ther's nothing here go away</h1>
-            {/* <Link to="/keep/note/edit"><button>Add note</button></Link>
-            <NoteFilter onSetFilter={this.onSetFilter} history={this.props.history} />
-            <NoteList notes={notes} onSelectNote={this.onSelectNote} /> */}
+            <h1>there's nothing here go away</h1>
+            <section className="notes-container">
+                {notes.map(note => {
+                    return <div className="note-card flex" key={note.id}>
+                        <div>{`type: ${note.type}`}</div>
+                        <p>{note.desc}</p>
+                    </div>
+                })}
+            </section>
         </section>
     }
 }

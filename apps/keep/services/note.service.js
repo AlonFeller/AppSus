@@ -16,7 +16,7 @@ var gTypes = ['txt', 'img', 'video', 'todo', 'audio', 'canvas', 'map']
 function query(filterBy) {
     let Notes = _loadFromStorage()
     if (!Notes) {
-        Notes = _createCars()
+        Notes = _createNotes()
         _saveToStorage(Notes)
     }
 
@@ -77,21 +77,22 @@ function getTypes() {
     return gTypes
 }
 
-function _createnote(type, speed = utilService.getRandomIntInclusive(1, 200)) {
+function _createNote(type) {
     return {
         id: utilService.makeId(),
         type: type,
-        speed,
-        desc: utilService.makeLorem()
+        isPinned: (utilService.getRandomIntInclusive(0, 10) > 5) ? true : false,
+        desc: utilService.makeLorem(25)
     }
 }
 
 function _createNotes() {
     const notes = []
     for (let i = 0; i < 20; i++) {
-        const type = gTypes[utilService.getRandomIntInclusive(0, type.length - 1)]
-        notes.push(_createnote(type))
+        const type = gTypes[utilService.getRandomIntInclusive(0, gTypes.length - 1)]
+        notes.push(_createNote(type))
     }
+    console.table(notes);
     return notes
 }
 
