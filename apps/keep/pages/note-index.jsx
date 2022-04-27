@@ -29,7 +29,6 @@ export class KeepApp extends React.Component {
     render() {
         const { notes } = this.state
         return <section className="keep-app">
-            <InputDeviceInfo
             <h1>ther\'s nothing here go away</h1>
             {/* <Link to="/keep/note/edit"><button>Add note</button></Link>
             <NoteFilter onSetFilter={this.onSetFilter} history={this.props.history} />
