@@ -4,40 +4,38 @@ import { utilService } from '../../../services/util.service.js'
 export const emailService = {
     getById,
     query,
-    remove,
+    remove
 
 }
 
 const KEY = 'emailsDB'
 
 
-function query(filterBy) {
+function query() {
     let emails = _loadFromStorage()
     if (!emails) {
         emails = _creatEmails()
         _saveToStorage(emails)
     }
-
-    // if (filterBy) {
-    //     let { vendor, minSpeed, maxSpeed } = filterBy
-    //     if (!minSpeed) minSpeed = 0;
-    //     if (!maxSpeed) maxSpeed = Infinity
-    //     cars = cars.filter(car =>
-    //         car.vendor.includes(vendor) &&
-    //         car.speed <= maxSpeed &&
-    //         car.speed >= minSpeed)
-    // }
-
+    console.log(emails)
     return Promise.resolve(emails)
 }
- const criteria = {
-     status: 'inbox/sent/trash/draft',
-     txt: 'puki', // no need to support complex text search
-     isRead: false, // (optional property, if missing: show all)
-     isStared: false, // (optional property, if missing: show all)
-     lables: ['important', 'romantic'] // has any of the labels
- }
 
+
+const criteria = {
+    status: 'inbox/sent/trash/draft',
+    txt: 'puki', // no need to support complex text search
+    isRead: false, // (optional property, if missing: show all)
+    isStared: false, // (optional property, if missing: show all)
+    lables: ['important', 'romantic'] // has any of the labels
+}
+
+
+function getById(emailId) {
+    const emails = _loadFromStorage()
+    const email = emails.find(email => emailId === email.id)
+    return Promise.resolve(email)
+}
 
 function remove(emailId) {
     let emails = _loadFromStorage()
@@ -46,15 +44,26 @@ function remove(emailId) {
     return Promise.resolve()
 }
 
-function getById(emailId) {
-    const emails = _loadFromStorage()
-    const email = emails.find(email => emailId === email.id)
-    return Promise.resolve(email)
+function _add(emailToAdd) {
+    let emails = _loadFromStorage()
+    const email = _creatEmail()
+    emails = [email, ...emails]
+    _saveToStorage(emails)
+    return Promise.resolve()
 }
 
-function _creatEmails(){
+function _update(emailToUpdate) {
+    let emails = _loadFromStorage()
+    emails = emails.map(email => email.id === emailToUpdate.id ? emailToUpdate : email)
+    _saveToStorage(emails)
+    return Promise.resolve()
+}
+
+function _creatEmails() {
     const emails = []
-    emails.push(_creatEmail())
+    for (let i = 0; i < 5; i++) {
+        emails.push(_creatEmail())
+    }
     return emails
 }
 
