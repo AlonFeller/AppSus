@@ -1,5 +1,5 @@
-import {AppHeader} from "cmps/app-header.jsx/"
-import {Home} from 'pages/app-home.jsx'
+import {AppHeader} from "./cmps/app-header.jsx"
+import {Home} from './pages/app-home.jsx'
 
 const Router = ReactRouterDOM.HashRouter
 const { Route, Switch } = ReactRouterDOM

@@ -1,4 +1,27 @@
 body {
     background-color: rgb(245, 232, 168);
     height: 100vh;
+    margin: 0%;
+    padding: 0%;
+}
+
+header {
+    background-color: rgb(212, 197, 120);
+    height: 5vh;
+    display: flex;
+    justify-content: space-between;
+    justify-self: center;
+    padding: 20px;
+}
+
+nav {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home {
+    align-items: center;
+    text-align: center;
 }
