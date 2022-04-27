@@ -1,0 +1,46 @@
+body {
+    background-color: rgb(245, 232, 168);
+    height: 100vh;
+    margin: 0%;
+    padding: 0%;
+}
+
+header {
+    box-sizing: border-box;
+    background-color: rgb(212, 197, 120);
+    height: 5vh;
+    display: flex;
+    justify-content: space-between;
+    justify-self: center;
+    padding: 20px;
+}
+
+nav {
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app {
+    box-sizing: border-box;
+    height: 92vh;
+    padding-top: 30%;
+    align-items: center;
+    text-align: center;
+    background-color: darkorange;
+}
+
+.home {
+    box-sizing: border-box;
+    height: 92vh;
+    padding-top: 30%;
+    align-items: center;
+    text-align: center;
+}
+
+footer {
+    height: 3vh;
+    background-color: rgb(212, 197, 120);
+    text-align: center;
+}

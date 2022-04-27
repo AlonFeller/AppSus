@@ -1,8 +1,8 @@
-.car-filter {
+.note-filter {
     padding: 20px;
 }
 
-.car-filter form {
+.note-filter form {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -10,6 +10,6 @@
     gap: 5px;
 }
 
-.car-filter form label {
+.note-filter form label {
     margin-bottom: 5px;
 }
