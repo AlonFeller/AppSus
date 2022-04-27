@@ -1,10 +1,9 @@
-export class CarFilter extends React.Component {
+export class EmailFilter extends React.Component {
 
     state = {
         filterBy: {
-            vendor: '',
-            minSpeed: '',
-            maxSpeed: ''
+            search: '',
+            isRead: false,
         },
     }
 
@@ -30,20 +29,16 @@ export class CarFilter extends React.Component {
 
 
     render() {
-        const { vendor, minSpeed, maxSpeed } = this.state.filterBy
-        return <section className="car-filter">
+        const { search, isRead } = this.state.filterBy
+        return <section className="email-filter">
             <form onSubmit={this.onFilter}>
-                <label htmlFor="by-vendor">Vendor</label>
-                <input type="text" id="by-vendor" placeholder="by vendor" name="vendor"
-                    value={vendor} onChange={this.handleChange} ref={this.inputRef} />
+                <label htmlFor="by-search">Search mail</label>
+                <input type="text" id="by-search" placeholder="by search" name="search"
+                    value={search} onChange={this.handleChange} ref={this.inputRef} />
 
-                <label htmlFor="by-minSpeed">Min Speed</label>
-                <input type="number" id="by-minSpeed" placeholder="by min speed" name="minSpeed"
-                    value={minSpeed} onChange={this.handleChange} />
-
-                <label htmlFor="by-maxSpeed">Max Speed</label>
-                <input type="number" id="by-maxSpeed" placeholder="by max speed" name="maxSpeed"
-                    value={maxSpeed} onChange={this.handleChange} />
+                <label htmlFor="by-read">read </label>
+                <input type="checkbox" id="by-read" name="isRead"
+                     onChange={this.handleChange} />
 
                 <button>FILTER!</button>
             </form>
