@@ -36,32 +36,24 @@ export class EmailApp extends React.Component {
 
 
 
-    // render() {
-    //     return <section className="email-app">
-    //         <div className="search-bar">
-    //             {/* <input type="text" placeholder="Search"> */}
-    //         </div>
-    //         <nav className="label-side-bar">
-    //             <button className="inbox-msgs"></button>
-    //             <button className="sent-msgs"></button>
-    //             <button className="trash-msgs"></button>
-    //             <button className="draft-msgs"></button>
-    //         </nav>
-    //         <section className="mails-container">
-    //         {/* <EmailList cars={this.carsToDisplay} onSelectCar={this.onSelectCar} /> */}
-    //         </section>
-    //     </section>
-
-    // }
-
     render() {
         const { emails } = this.state
         return <section className="email-app">
-            this is email app
-            <EmailList emails = {emails}/>
+            <form className="search-bar">
+                <label htmlFor="search">search</label>
+                <input type="text" id="search" placeholder="Search" />
+            </form>
+            <nav className="label-side-bar">
+                <button className="inbox-msgs">inbox</button>
+                <button className="sent-msgs">sent</button>
+                <button className="trash-msgs">trash</button>
+                <button className="draft-msgs">draft</button>
+            </nav>
+            <section className="mails-container">
+                {/* <EmailList cars={this.carsToDisplay} onSelectCar={this.onSelectCar} /> */}
+                <EmailList emails={emails} />
+            </section>
         </section>
+
     }
-
-
-
 }
