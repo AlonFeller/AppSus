@@ -13,25 +13,27 @@ export class KeepApp extends React.Component {
     }
 
 
-    componentDidMount() {
-        this.loadNotes()
-    }
+    // componentDidMount() {
+    //     this.loadNotes()
+    // }
 
-    loadNotes = () => {
-        noteService.query(this.state.filterBy)
-            .then(notes => this.setState({ notes }))
-    }
+    // loadNotes = () => {
+    //     noteService.query(this.state.filterBy)
+    //         .then(notes => this.setState({ notes }))
+    // }
 
-    onSetFilter = (filterBy) => {
-        this.setState({ filterBy }, this.loadNotes)
-    }
+    // onSetFilter = (filterBy) => {
+    //     this.setState({ filterBy }, this.loadNotes)
+    // }
 
     render() {
         const { notes } = this.state
         return <section className="keep-app">
-            <Link to="/keep/note/edit"><button>Add note</button></Link>
+            <InputDeviceInfo
+            <h1>ther\'s nothing here go away</h1>
+            {/* <Link to="/keep/note/edit"><button>Add note</button></Link>
             <NoteFilter onSetFilter={this.onSetFilter} history={this.props.history} />
-            <NoteList notes={notes} onSelectNote={this.onSelectNote} />
+            <NoteList notes={notes} onSelectNote={this.onSelectNote} /> */}
         </section>
     }
 }

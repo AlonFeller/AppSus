@@ -41,16 +41,16 @@ export class CarDetails extends React.Component {
         const nextNoteId = noteService.getNextNoteId(note.id)
         return <section className="note-details">
             Hello from note details
-            <h3>type : {note.type}</h3>
+            {/* <h3>type : {note.type}</h3>
             {/* <div className="img-container">
                 <img src={`assets/img/${note.vendor}.jpg`} />
             </div> */}
-            <p>{note.desc}</p>
+            {/* <p>{note.desc}</p>
 
             <button onClick={this.onGoBack}>Go Back!</button>
             <button onClick={this.onRemoveNote}>Delete</button>
             <Link to={`/note/${nextNoteId}`}><button>Next note</button></Link>
-            <Link to={`/note/edit/${note.id}`}><button>Edit note</button></Link>
+            <Link to={`/note/edit/${note.id}`}><button>Edit note</button></Link> */} 
         </section>
     }
 }
