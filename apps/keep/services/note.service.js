@@ -78,12 +78,14 @@ function getTypes() {
 }
 
 function _createNote(type) {
-    return {
+    let note = {
         id: utilService.makeId(),
-        type: type,
+        type,
         isPinned: (utilService.getRandomIntInclusive(0, 10) > 5) ? true : false,
-        desc: utilService.makeLorem(25)
+
     }
+    if (type === 'txt') note.desc = utilService.makeLorem(25)
+    return note
 }
 
 function _createNotes() {
