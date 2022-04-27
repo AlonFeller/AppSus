@@ -1,0 +1,15 @@
+.car-filter {
+    padding: 20px;
+}
+
+.car-filter form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.car-filter form label {
+    margin-bottom: 5px;
+}
