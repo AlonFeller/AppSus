@@ -30,6 +30,14 @@ function query(filterBy) {
 
     return Promise.resolve(emails)
 }
+ const criteria = {
+     status: 'inbox/sent/trash/draft',
+     txt: 'puki', // no need to support complex text search
+     isRead: false, // (optional property, if missing: show all)
+     isStared: false, // (optional property, if missing: show all)
+     lables: ['important', 'romantic'] // has any of the labels
+ }
+
 
 function remove(emailId) {
     let emails = _loadFromStorage()
@@ -74,11 +82,3 @@ function _loadFromStorage() {
 //     email: 'user@appsus.com',
 //     fullname: 'Mahatma Appsus'
 // }
-
-// const criteria = {
-//     status: 'inbox/sent/trash/draft',
-//     txt: 'puki', // no need to support complex text search
-//     isRead: true, // (optional property, if missing: show all)
-//     isStared: true, // (optional property, if missing: show all)
-//     lables: ['important', 'romantic'] // has any of the labels
-//    }
