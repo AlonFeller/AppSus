@@ -25,7 +25,6 @@ nav {
 .app {
     box-sizing: border-box;
     height: 92vh;
-    padding-top: 30%;
     align-items: center;
     text-align: center;
     background-color: darkorange;
