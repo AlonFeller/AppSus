@@ -8,7 +8,7 @@ body {
 header {
     box-sizing: border-box;
     background-color: rgb(199, 199, 199);
-    height: 5vh;
+    height: 7vh;
     display: flex;
     justify-content: space-between;
     justify-self: center;
@@ -40,7 +40,6 @@ nav {
 }
 
 footer {
-    position: ;
     height: 3vh;
     background-color: rgb(199, 199, 199);
     text-align: center;
