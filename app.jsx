@@ -17,5 +17,6 @@ export function App() {
                 <Route path="/" component={Home} />
             </Switch>
         </section>
+        <footer>liRights 2022</footer>
     </Router>
 }

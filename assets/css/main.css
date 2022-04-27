@@ -6,6 +6,7 @@ body {
 }
 
 header {
+    box-sizing: border-box;
     background-color: rgb(212, 197, 120);
     height: 5vh;
     display: flex;
@@ -15,13 +16,31 @@ header {
 }
 
 nav {
-    width: 300px;
+    width: 200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.home {
+.app {
+    box-sizing: border-box;
+    height: 92vh;
+    padding-top: 30%;
     align-items: center;
+    text-align: center;
+    background-color: darkorange;
+}
+
+.home {
+    box-sizing: border-box;
+    height: 92vh;
+    padding-top: 30%;
+    align-items: center;
+    text-align: center;
+}
+
+footer {
+    height: 3vh;
+    background-color: rgb(212, 197, 120);
     text-align: center;
 }
