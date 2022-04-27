@@ -1,78 +1,75 @@
 import { storageService } from '../../../services/storage.service.js'
+import { utilService } from '../../../services/util.service.js'
 
-
-import { storageService } from './storage.service.js'
-import { utilService } from './util.service.js'
-
-export const KeepService = {
+export const NoteService = {
     getById,
     query,
-    saveKeep,
+    saveKeep: saveNote,
     remove,
     getTypes,
-    getNextCarId
+    getNextNoteId
 }
 
-const KEY = 'keepsDB'
+const KEY = 'notesDB'
 var gTypes = ['txt', 'img', 'video', 'todo', 'audio', 'canvas', 'map']
 
 function query(filterBy) {
-    let keeps = _loadFromStorage()
-    if (!keeps) {
-        keeps = _createCars()
-        _saveToStorage(keeps)
+    let Notes = _loadFromStorage()
+    if (!Notes) {
+        Notes = _createCars()
+        _saveToStorage(Notes)
     }
 
     if (filterBy) {
         let { type, minSpeed, maxSpeed } = filterBy
         if (!minSpeed) minSpeed = 0;
         if (!maxSpeed) maxSpeed = Infinity
-        keeps = keeps.filter(keep =>
-            keep.type.includes(type) &&
-            keep.speed <= maxSpeed &&
-            keep.speed >= minSpeed)
+        Notes = Notes.filter(Note =>
+            Note.type.includes(type) &&
+            Note.speed <= maxSpeed &&
+            Note.speed >= minSpeed)
     }
 
-    return Promise.resolve(keeps)
+    return Promise.resolve(Notes)
 }
 
-function getNextCarId(keepId) {
-    const keeps = _loadFromStorage()
-    const keepIdx = keeps.findIndex(keep => keepId === keep.id)
-    const nextCarIdx = (keepIdx + 1 === keeps.length) ? 0 : keepIdx + 1
-    return keeps[nextCarIdx].id
+function getNextCarId(noteId) {
+    const notes = _loadFromStorage()
+    const noteIdx = notes.findIndex(note => noteId === note.id)
+    const nextNoteIdx = (noteIdx + 1 === notes.length) ? 0 : noteIdx + 1
+    return notes[nextNoteIdx].id
 }
 
-function getById(keepId) {
-    const keeps = _loadFromStorage()
-    const keep = keeps.find(keep => keepId === keep.id)
-    return Promise.resolve(keep)
+function getById(NoteId) {
+    const notes = _loadFromStorage()
+    const note = notes.find(note => NoteId === note.id)
+    return Promise.resolve(note)
 }
 
-function remove(keepId) {
-    let keeps = _loadFromStorage()
-    keeps = keeps.filter(kep => kep.id !== keepId)
-    _saveToStorage(keeps)
+function remove(noteId) {
+    let notes = _loadFromStorage()
+    notes = notes.filter(note => note.id !== noteId)
+    _saveToStorage(notes)
     return Promise.resolve()
 }
 
-function saveKeep(keep) {
-    if (keep.id) return _update(keep)
-    else return _add(keep)
+function saveNote(note) {
+    if (note.id) return _update(note)
+    else return _add(note)
 }
 
-function _add(keepToAdd) {
-    let keeps = _loadFromStorage()
-    const keep = _createCar(keepToAdd.type, keepToAdd.speed)
-    keeps = [keep, ...keeps]
-    _saveToStorage(keeps)
+function _add(noteToAdd) {
+    let notes = _loadFromStorage()
+    const note = _createCar(noteToAdd.type, noteToAdd.speed)
+    notes = [note, ...notes]
+    _saveToStorage(notes)
     return Promise.resolve()
 }
 
-function _update(keepToUpdate) {
-    let keeps = _loadFromStorage()
-    keeps = keeps.map(keep => keep.id === keepToUpdate.id ? keepToUpdate : keep)
-    _saveToStorage(keeps)
+function _update(noteToUpdate) {
+    let notes = _loadFromStorage()
+    notes = notes.map(note => note.id === noteToUpdate.id ? noteToUpdate : note)
+    _saveToStorage(notes)
     return Promise.resolve()
 }
 
@@ -80,7 +77,7 @@ function getTypes() {
     return gTypes
 }
 
-function _createKeep(type, speed = utilService.getRandomIntInclusive(1, 200)) {
+function _createnote(type, speed = utilService.getRandomIntInclusive(1, 200)) {
     return {
         id: utilService.makeId(),
         type: type,
@@ -89,17 +86,17 @@ function _createKeep(type, speed = utilService.getRandomIntInclusive(1, 200)) {
     }
 }
 
-function _createKeeps() {
-    const keeps = []
+function _createNotes() {
+    const notes = []
     for (let i = 0; i < 20; i++) {
         const type = gTypes[utilService.getRandomIntInclusive(0, type.length - 1)]
-        keeps.push(_createKeep(type))
+        notes.push(_createnote(type))
     }
-    return keeps
+    return notes
 }
 
-function _saveToStorage(keeps) {
-    storageService.saveToStorage(KEY, keeps)
+function _saveToStorage(notes) {
+    storageService.saveToStorage(KEY, notes)
 }
 
 function _loadFromStorage() {
@@ -107,7 +104,7 @@ function _loadFromStorage() {
 }
 
 
-const notes = [{
+const gNotes = [{
         id: "n101",
         type: "note-txt",
         isPinned: true,
