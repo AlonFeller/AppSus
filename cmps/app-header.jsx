@@ -8,7 +8,7 @@ function _AppHeader(props) {
 
         <nav>
             <NavLink to="/" exact>Home</NavLink>
-            <NavLink to="/mail" exact>Mail</NavLink>
+            <NavLink to="/email" exact>eMail</NavLink>
             <NavLink to="/keep">Keep</NavLink>
             {/* <NavLink to="/car" activeClassName="my-active">Our Cars</NavLink> */}
         </nav>
