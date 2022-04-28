@@ -2,7 +2,7 @@ import { NoteService } from '../services/note.service.js'
 import { NotePreview } from '../cmps/note-preview.jsx'
 import { NoteList } from '../cmps/note-list.jsx'
 import { NoteFilter } from '../cmps/note-filter.jsx'
-
+import {NoteEdit} from '../cmps/take-note.jsx'
 const { Link } = ReactRouterDOM
 
 
@@ -34,6 +34,7 @@ export class KeepApp extends React.Component {
         console.log('well ? you happy now?');
         return <section className="keep-app">
             <h1>there's nothing here go away</h1>
+            {/* <NoteEdit/> */}
             <section className="notes-container">
                 {notes.map(note => {
                     return <div className="note-card flex" key={note.id}
