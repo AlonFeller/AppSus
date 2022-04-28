@@ -1,9 +1,11 @@
 /* setup */
 
+@import './root.css';
 @import './basics.css';
 @import './helpers.css';
 
 /* email */
+
 @import './email/email-filter.css';
 @import './email/email-list.css';
 @import './email/email-folder-list.css';
