@@ -12,11 +12,11 @@ export class EmailFolderList extends React.Component {
     render() {
         return <section className="email-folder-list">
             <ul>
-                <li className="mail-inbox-btn" ><a> Inbox </a></li>
-                <li className="mail-sent-btn" ><a >Sent</a></li>
-                <li><a className="mail-starred-btn">Starred</a></li>
-                <li><a className="mail-trash-btn">Trash</a></li>
-                <li><a className="mail-drafts-btn">Drafts</a></li>
+                <li className="mail-inbox-btn">Inbox</li>
+                <li className="mail-sent-btn">Sent</li>
+                <li className="mail-starred-btn">Starred</li>
+                <li className="mail-trash-btn">Trash</li>
+                <li className="mail-drafts-btn">Drafts</li>
             </ul>
 
         </section>
