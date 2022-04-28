@@ -5,7 +5,7 @@ export function EmailPreview({ email, onReadingEmail }) {
     console.log(email.message)
     return <article className="email-preview" >
         <div className="email-preview-msg" onClick={() => onReadingEmail(email.id)}>
-            <div class="btns">
+            <div class="btns flex">
                 <button class="trash-btn flex justify-cnter align-center">delete</button>
                 <button class="starred-btn flex justify-cnter align-center">star</button>
                 <button class="read-btn flex justify-cnter align-center">read/unread</button>
