@@ -34,12 +34,13 @@ export class KeepApp extends React.Component {
         console.log('well ? you happy now?');
         return <section className="keep-app">
             <h1>there's nothing here go away</h1>
-            <CreateNote/>
+            {/* <CreateNote/> */}
             <section className="notes-container">
                 {notes.map(note => {
                     return <div className="note-card flex" key={note.id}
                     // onClick = { NotePreview(note) } 
                     >
+                        <img src={note.info.url}/>
                         <p>{note.info.desc}</p>
                         <div>{`type: ${note.type}`}</div>
                     </div>
