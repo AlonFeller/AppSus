@@ -62,7 +62,7 @@ function _update(emailToUpdate) {
 function _creatEmails() {
     const emails = []
     for (let i = 0; i < 5; i++) {
-        emails.push(_creatEmail())
+        emails.push(_creatEmail(i))
     }
     return emails
 }
@@ -71,9 +71,10 @@ function _creatEmail() {
     const email = {
         id: utilService.makeId(),
         subject: 'Miss you!',
-        body: 'Would love to catch up sometimes',
+        // body: 'Would love to catch up sometimes',
+        body: utilService.makeId(),
         isRead: false,
-        sentAt: 1551133930594,
+        sentAt: Date.now(),
         to: 'momo@momo.com'
     }
     return email

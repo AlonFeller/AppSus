@@ -4,8 +4,10 @@
 @import './helpers.css';
 
 /* email */
-
-@import './email/email-app.css';
+@import './email/email-filter.css';
+@import './email/email-list.css';
+@import './email/email-preview.css';
+@import './email/email-index.css';
 
 /* keep */
 
