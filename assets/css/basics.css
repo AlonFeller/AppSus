@@ -36,10 +36,6 @@ nav {
     align-items: center;
 }
 
-nav :hover {
-    /* box-shadow: inset 0px -26px 12px -20px var(--color2); */
-}
-
 .app {
     box-sizing: border-box;
     align-items: center;
