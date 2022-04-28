@@ -19,7 +19,14 @@
 }
 
 .email-folder-list ul li {
-    height: 50px;
+    height: 70px;
     width: 100%;
     cursor: pointer;
+    transition: 0.2s;
+}
+
+.email-folder-list ul :hover {
+    box-shadow: inset 70px 0px 7px -8px var(--color1);
+    color: var(--color1);
+    /* background-color: var(--color1); */
 }

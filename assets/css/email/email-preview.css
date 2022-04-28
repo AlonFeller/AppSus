@@ -18,6 +18,8 @@
     /* display: flex; */
     /* justify-content: space-between;
     align-items: center; */
+    box-sizing: border-box;
+    height: 70px;
     display: grid;
     grid-template-columns: 1fr 2fr 6fr 1fr;
     font-size: 14px;
