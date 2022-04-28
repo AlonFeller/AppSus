@@ -20,6 +20,6 @@
 
 .email-folder-list ul li {
     height: 50px;
-    width: 50px;
+    width: 100%;
     cursor: pointer;
 }
