@@ -26,7 +26,7 @@ export function NotePreview({ note }) {
         </div>
     }
     if (note.type === 'todo') {
-        return <div className="note-card flex" key={note.id}>
+        return <div className="note-card flex left" key={note.id}>
             <ul>
                 {note.info.todos.map((todo, i) => {
                     return <li key={i} className="flex">
