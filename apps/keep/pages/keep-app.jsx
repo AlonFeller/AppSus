@@ -34,7 +34,7 @@ export class KeepApp extends React.Component {
         console.log('well ? you happy now?');
         return <section className="keep-app">
             <h1>there's nothing here go away</h1>
-            {/* <CreateNote/> */}
+            {/* <CreateNote onAddNote={this.onAddNote} /> */}
             <section className="notes-container">
                 {notes.map(note => <NotePreview note={note} key={note.id} />)}
             </section>

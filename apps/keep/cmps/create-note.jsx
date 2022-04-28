@@ -1,53 +1,96 @@
-import { NoteService } from "../services/note.service.js";
-import {utilService} from "../../../services/util.service.js";
-export class CreateNote extends React.Component {}
+// import { NoteService } from '../services/note.service.js'
+// import { NotePreview } from '../cmps/note-preview.jsx'
+// import { NoteList } from '../cmps/note-list.jsx'
+// import { NoteFilter } from '../cmps/note-filter.jsx'
+// import { CreateNote } from '../cmps/create-note.jsx'
+// const { Link } = ReactRouterDOM
+
+
+// export class CreateNote extends React.Component {
 
 //     state = {
-//         note: {
+//         notes: {
 //             id: utilService.makeId(),
-//             type:NoteService.,
-//             info: {},
-//             isPinned: false
+//             type: 'txt',
+//             info: {
+//                 txt: ''
+//             }
 //         }
 //     }
 
-//     ComponentDidMount() {
-//         console.log('props from noteEdit', this.props);
-//         this.loadNote()
-//     }
+//     // removeEventBus
 
-//     loadNote = () => {
-//         const { noteId } = this.prop.match.params
-//         if (!noteId) return
-//         NoteService.getById(noteId)
-//         .then(note=>this.setState({note}))
-//     }
+//     // componentDidMount() {
+//     //     this.removeEventBus = eventBusService.on('toggleNoteCompose', (isOpen) => {
+//     //         this.setState((prevState) => ({ ...prevState, isOpen }))
+//     //     })
+//     // }
 
-//     handleChange = ({ target }) => {
-//         const field = target.name
-//         const value = target.type === 'number' ? +target.value : target.value
-//         this.setState((prevState) => ({ note: { ...prevState.note, [field]: value } }))
-//     }
+//     // componentWillUnmount() {
+//     //     this.removeEventBus();
+//     // }
 
-//     onSaveNote = (ev) => {
-//         ev.preventDefault()
-//         carService.saveCar(this.state.note)
+//     // handleFieldChange = ({ target }) => {
+//     //     this.setState(prevState => ({ ...prevState, notes: { ...prevState.notes, [target.name]: target.value } }))
+//     // }
+
+//     // onChangeType = (ev, type) => {
+//     //     ev.preventDefault()
+//     //     this.setState(prevState => ({ ...prevState, type }))
+//     // }
+
+//     // onToggleExtraFields = (isComposeOpen) => {
+//     //     eventBusService.emit('toggleScreen', isComposeOpen)
+//     //     this.setState(prevState => ({ ...prevState, isOpen: isComposeOpen }))
+//     // }
+
+//     onCreateNote = (ev) => {
+//         ev.preventDefault();
+//         this.onToggleExtraFields(false);
+//         this.props.onAddNote(this.state)
 //             .then(() => {
-//                 this.props.history.push('/note')
+//                 console.log('go on already!');
+//                 this.setState(prevState => ({
+//                     ...prevState, notes: ({
+//                         id: utilService.makeId(),
+//                         type: 'txt',
+//                         info: {
+//                             txt: ''
+//                         }
+//                     })
+//                 }))
 //             })
+//            .catch (err => alert(err))
 //     }
 
 //     render() {
-//         const { type, info } = this.state.note
-//         return     <section className="note-edit">
-//         <form className="flex column align-center" onSubmit={this.onSaveNote}>
-//             <label htmlFor="type">type</label>
-//             <input type="text" id="type" name="type" value={type} onChange={this.handleChange} />
+//         const { type, isOpen } = this.state
+//         return <form className={`compose-note ${(isOpen) ? 'compose-open' : ''}`} onSubmit={(ev) => { this.onCreateNote(ev) }}>
+//            <div className={`compose-preview flex column ${(isOpen && type !== 'todos') ? 'compose-open' : ''}`}>
+  
+//               <div className="compose-types flex">
+//                  <button className={`fas fa-paragraph ${(type === 'txt' ? 'active' : '')}`} onClick={(ev) => this.onChangeType(ev, 'txt')}></button>
+//                  <button className={`fas fa-image ${(type === 'img' ? 'active' : '')}`} onClick={(ev) => this.onChangeType(ev, 'img')}></button>
+//                  <button className={`fas fa-tasks  ${(type === 'todos' ? 'active' : '')}`} onClick={(ev) => this.onChangeType(ev, 'todos')}></button>
+//               </div>
+//               <input type="text"
+//                  name="title"
+//                  placeholder="Title"
+//                  onChange={this.handleFieldChange}
+//                  onFocus={() => this.onToggleExtraFields(true)}
+//                  className={` ${(isOpen && type !== 'todos') ? 'compose-open' : ''}`}
+//                  value={this.state.fields.title} />
+//            </div>
+  
+//            <div className={`flex column extra-fields ${(!this.state.isOpen) ? 'hidden' : ''}`}>
+  
+//               {type === 'txt' && < textarea type="text" name="txt" placeholder="Compose your text" onChange={this.handleFieldChange} value={this.state.fields.txt} />}
+//               {type === 'img' && <input type="text" name="url" placeholder="Image url" onChange={this.handleFieldChange} value={this.state.fields.url} />}
+//               {type === 'todos' && <ComposeTodos handleFieldChange={this.handleFieldChange} />}
+  
+//               <button className="notes-primary-btn">Create</button>
+//            </div>
+//         </form >
+//      }
+//   }
 
-//             <label htmlFor="info">Take a note...</label>
-//             <input type="info" id="info" name="info" value={info} onChange={this.handleChange} />
-//             <button>Save note!</button>
-//         </form>
-//     </section>
-//     }
-// }

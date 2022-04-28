@@ -11,7 +11,9 @@ export const NoteService = {
 }
 
 const KEY = 'notesDB'
-var gTypes = ['txt', 'img', 'video', 'todo', 'audio', 'canvas', 'map']
+var gTypes = ['txt', 'img', 'todo']
+    // , 'audio', 'canvas','video', 'map' to be continued
+
 
 function query(filterBy) {
     let Notes = _loadFromStorage()
@@ -93,7 +95,7 @@ function _createNote(type) {
     }
     if (type === 'video') {
         note.info = {
-            url: "https://www.youtube.com/embed/pHONjZhCpRo",
+            url: "https://www.youtube.com/embed/yLTnRPoP2OM",
             title: "YouTube video player"
         }
     }

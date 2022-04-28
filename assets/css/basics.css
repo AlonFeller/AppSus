@@ -1,8 +1,18 @@
 body {
-    background-color: rgb(227, 227, 227);
+    background: rgb(227, 227, 227) url(./assets/img/home.jpg);
     height: 100vh;
     margin: 0%;
     padding: 0%;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 18px;
+    letter-spacing: -0.4px;
+    word-spacing: -0.8px;
+    color: #000000;
+    font-weight: 400;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
 }
 
 header {
@@ -15,6 +25,7 @@ header {
     padding-left: 20px;
     padding-right: 20px;
     margin-bottom: 10px;
+    box-shadow: inset 0px -26px 12px -20px rgb(152, 234, 255);
 }
 
 nav {
@@ -24,6 +35,10 @@ nav {
     align-items: center;
 }
 
+nav :hover {
+    box-shadow: inset 0px -26px 12px -20px rgb(111, 126, 255);
+}
+
 .app {
     box-sizing: border-box;
     align-items: center;
@@ -31,10 +46,20 @@ nav {
     /* background-color: rgb(223, 231, 232); */
 }
 
+.img-container {
+    position: absolute;
+    top: 150px
+}
+
+.home-img {
+    height: 100%;
+    width: 100%;
+}
+
 .home {
     box-sizing: border-box;
     height: 92vh;
-    padding-top: 30%;
+    padding-top: 330px;
     align-items: center;
     text-align: center;
 }
