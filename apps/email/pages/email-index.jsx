@@ -2,6 +2,7 @@ import { emailService } from '../services/email.service.js'
 import { EmailList } from '../cmps/email-list.jsx'
 import { EmailFilter } from '../cmps/email-filter.jsx'
 import { EmailDetails } from '../pages/email-details.jsx'
+import { EmailFolderList } from '../cmps/email-folder-list.jsx'
 
 
 export class EmailApp extends React.Component {
@@ -38,12 +39,7 @@ export class EmailApp extends React.Component {
         return
         <section className="email-app">
             <EmailFilter onSetFilter={this.onSetFilter} />
-            <nav className="label-side-bar">
-                <button className="inbox-msgs">inbox</button>
-                <button className="sent-msgs">sent</button>
-                <button className="trash-msgs">trash</button>
-                <button className="draft-msgs">draft</button>
-            </nav>
+            <EmailFolderList />
             <section className="mails-container">
                 <EmailList emails={this.state.emails} />
             </section>

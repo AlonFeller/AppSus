@@ -1,0 +1,12 @@
+.email-folder-list{
+    background-color: rgb(215, 166, 166);
+    grid-column: 1/2;
+    display: flex;
+    flex-direction: column;
+}
+
+.email-folder-list button{
+    height: 100px;
+    width: 100px;
+    cursor: pointer;
+}
