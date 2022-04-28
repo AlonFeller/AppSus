@@ -1,19 +1,15 @@
-*{
+* {
     box-sizing: border-box;
 }
 
-.email-app{
+.email-app {
     width: 100%;
-    height: 100%;
+    height: 90vh;
     display: grid;
-    grid-template-columns: 15% 85%;
-    grid-template-rows: 15% 85%;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 50px 1fr;
 }
 
-
-.mails-container{
-    background-color: rgb(216, 212, 175);
+.mails-container {
+    background-color: var(--color4);
 }
-
-
-

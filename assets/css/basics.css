@@ -1,5 +1,5 @@
 body {
-    background: rgb(227, 227, 227) url(./assets/img/home.jpg);
+    background: var(--color4);
     height: 100vh;
     margin: 0%;
     padding: 0%;
@@ -17,15 +17,15 @@ body {
 
 header {
     box-sizing: border-box;
-    background-color: rgb(199, 199, 199);
+    background-color: var(--color3);
+    border-bottom: 3px solid var(--color2);
     height: 7vh;
     display: flex;
     justify-content: space-between;
     justify-self: center;
     padding-left: 20px;
     padding-right: 20px;
-    margin-bottom: 10px;
-    box-shadow: inset 0px -26px 12px -20px rgb(152, 234, 255);
+    box-shadow: inset 0px -26px 12px -20px var(--color2);
 }
 
 nav {
@@ -36,24 +36,13 @@ nav {
 }
 
 nav :hover {
-    box-shadow: inset 0px -26px 12px -20px rgb(111, 126, 255);
+    box-shadow: inset 0px -26px 12px -20px var(--color2);
 }
 
 .app {
     box-sizing: border-box;
     align-items: center;
     text-align: center;
-    /* background-color: rgb(223, 231, 232); */
-}
-
-.img-container {
-    position: absolute;
-    top: 150px
-}
-
-.home-img {
-    height: 100%;
-    width: 100%;
 }
 
 .home {
@@ -62,10 +51,11 @@ nav :hover {
     padding-top: 330px;
     align-items: center;
     text-align: center;
+    background: var(--color4);
 }
 
 footer {
     height: 3vh;
-    background-color: rgb(199, 199, 199);
+    background-color: var(--color3);
     text-align: center;
 }
