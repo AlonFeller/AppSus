@@ -2,12 +2,26 @@
     background-color: var(--color1);
 }
 
+.email-preview .message-container {
+    grid-column: 3, 4;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 1fr;
+}
+
+.mail-message,
+.mail-subject {
+    text-align: left;
+}
+
 .email-preview-msg {
-    display: flex;
+    /* display: flex; */
+    /* justify-content: space-between;
+    align-items: center; */
+    display: grid;
+    grid-template-columns: 1fr 2fr 6fr 1fr;
     font-size: 14px;
     padding: 0 10px;
     border: 0.5px solid var(--color3);
-    justify-content: space-between;
-    align-items: center;
     cursor: pointer;
 }
