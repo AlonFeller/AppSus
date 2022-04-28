@@ -1,12 +1,14 @@
+import { LongTxt } from '../cmps/email-long-text.jsx';
+
 
 export function EmailPreview({ email, onReadingEmail }) {
-
+    console.log(email.message)
     return <article className="email-preview" >
         <div className="email-preview-msg" onClick={() => onReadingEmail(email.id)}>
-            <h3>To: {email.to}</h3>
-            <h3>{email.subject}</h3>
-            <h3>{email.body}</h3>
-            <h3>{email.sentAt}</h3>
+            <div>To: {email.to}</div>
+            <div className="mail-subject"><LongTxt txt={email.subject} chars={25} /></div>
+            <div className="mail-message"><LongTxt txt={email.body} chars={70} /></div>
+            <div>{email.sentAt}</div>
         </div>
     </article>
 

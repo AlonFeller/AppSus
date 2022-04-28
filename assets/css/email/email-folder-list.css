@@ -1,12 +1,21 @@
-.email-folder-list{
+.email-folder-list {
     background-color: rgb(215, 166, 166);
     grid-column: 1/2;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
-.email-folder-list button{
-    height: 100px;
-    width: 100px;
+.email-folder-list ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.email-folder-list ul li{
+    height: 50px;
+    width: 50px;
     cursor: pointer;
 }

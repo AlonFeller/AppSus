@@ -23,7 +23,9 @@ function query(filterBy) {
         let { search, isRead } = filterBy
         emails = emails.filter(email => {
             return email.body.toLowerCase().includes(search.toLowerCase()) ||
-                email.subject.toLowerCase().includes(search.toLowerCase()) &&
+                email.subject.toLowerCase().includes(search.toLowerCase()) ||
+                email.to.toLowerCase().includes(search.toLowerCase())
+                 &&
             email.isRead === isRead
         }
         )
@@ -92,7 +94,7 @@ function _creatEmail() {
         // body: 'Would love to catch up sometimes',
         body: utilService.makeLorem(),
         isRead: false,
-        sentAt: 1551133930594,
+        sentAt: new Date().toLocaleDateString(),
         to: 'momo@momo.com'
     }
     return email
