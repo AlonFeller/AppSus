@@ -36,8 +36,7 @@ export class EmailApp extends React.Component {
     }
 
     render() {
-        return
-        <section className="email-app">
+        return <section className="email-app">
             <EmailFilter onSetFilter={this.onSetFilter} />
             <EmailFolderList />
             <section className="mails-container">
