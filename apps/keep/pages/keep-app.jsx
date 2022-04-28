@@ -2,7 +2,7 @@ import { NoteService } from '../services/note.service.js'
 import { NotePreview } from '../cmps/note-preview.jsx'
 import { NoteList } from '../cmps/note-list.jsx'
 import { NoteFilter } from '../cmps/note-filter.jsx'
-import {CreateNote} from '../cmps/create-note.jsx'
+import { CreateNote } from '../cmps/create-note.jsx'
 const { Link } = ReactRouterDOM
 
 
@@ -36,15 +36,8 @@ export class KeepApp extends React.Component {
             <h1>there's nothing here go away</h1>
             {/* <CreateNote/> */}
             <section className="notes-container">
-                {notes.map(note => {
-                    return <div className="note-card flex" key={note.id}
-                    // onClick = { NotePreview(note) } 
-                    >
-                        <img src={note.info.url}/>
-                        <p>{note.info.desc}</p>
-                        <div>{`type: ${note.type}`}</div>
-                    </div>
-                })}
+                {notes.map(note => <NotePreview note={note}/> )}
+                
             </section>
         </section >
     }

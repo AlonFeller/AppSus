@@ -1,5 +1,5 @@
 import {AppHeader} from "./cmps/app-header.jsx"
-import {KeepApp} from "./apps/keep/pages/note-index.jsx"
+import {KeepApp} from "./apps/keep/pages/keep-app.jsx"
 import {EmailApp} from "./apps/email/pages/email-index.jsx"
 import {Home} from './pages/app-home.jsx'
 import { CreateNote } from "./apps/keep/cmps/create-note.jsx"

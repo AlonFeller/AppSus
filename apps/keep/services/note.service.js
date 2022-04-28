@@ -81,15 +81,28 @@ function _createNote(type) {
     let note = {
         id: utilService.makeId(),
         type,
-        info: {},
         isPinned: (utilService.getRandomIntInclusive(0, 10) > 5) ? true : false,
 
     }
-    if (type === 'txt') note.info.desc = utilService.makeLorem(25)
+    if (type === 'txt') note.desc = utilService.makeLorem(25)
     if (type === 'img') {
         note.info = {
-            url: `../../../assets/img/${utilService.getRandomIntInclusive(1 , 5)}.jpg`,
+            url: `../../../assets/img/${utilService.getRandomIntInclusive(1, 5)}.jpg`,
             title: utilService.makeLorem(3)
+        }
+    }
+    if (type === 'video') {
+        note.info = {
+            url: "https://www.youtube.com/embed/pHONjZhCpRo",
+            title: "YouTube video player"
+        }
+    }
+    if (type === 'todo') {
+        note.info = {
+            todo: [{ txt: "Driving license", doneAt: null },
+                { txt: "Coding power", doneAt: 187111111 }
+            ]
+
         }
     }
 
@@ -113,37 +126,3 @@ function _saveToStorage(notes) {
 function _loadFromStorage() {
     return storageService.loadFromStorage(KEY)
 }
-
-
-const gNotes = [{
-        id: "n101",
-        type: "note-txt",
-        isPinned: true,
-        info: { txt: "Fullstack Me Baby!" }
-    },
-    {
-        id: "n102",
-        type: "note-img",
-        info: {
-            url: "http://some-img/me",
-            title: "Bobi and Me"
-        },
-        style: { backgroundColor: "#00d" }
-    },
-    {
-        id: "n103",
-        type: "note-todos",
-        info: {
-            label: "Get my stuff together",
-            todos: [{
-                    txt: "Driving liscence",
-                    doneAt: null
-                },
-                {
-                    txt: "Coding power",
-                    doneAt: 187111111
-                }
-            ]
-        }
-    }
-];

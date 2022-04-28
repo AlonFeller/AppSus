@@ -1,13 +1,52 @@
 const { Link } = ReactRouterDOM
 
 
-export function NotePreview( note ) {
-    console.log(note);
-    return <Link to={`/keep/note/${note.id}`}>
-        <article className="Note-preview" >
-            <h3>type : {note.type}</h3>
-            <div className="img-container">
-            </div>
-        </article>
-    </Link>
+export function NotePreview({ note }) {
+    // console.log(note);
+    let idx = 0;
+    if (note.type === 'txt') {
+        return <div className="note-card flex" key={note.id}>
+            <p>{note.desc}</p>
+            <div>{`type: ${note.type}`}</div>
+        </div>
+    }
+    if (note.type === 'img') {
+        return <div className="note-card flex" key={note.id}>
+            <img src={note.info.url} />
+            <div>{`type: ${note.type}`}</div>
+        </div>
+    }
+    if (note.type === 'video') {
+        return <div className="note-card flex" key={note.id}>
+            <iframe width="260" height="215" src={note.info.url} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+            <div>{`type: ${note.type}`}</div>
+        </div>
+    }
+    if (note.type === 'todo') {
+        return <div className="note-card flex" key={note.id}>
+            <ul>
+                {note.info.todo.map(todo => {
+                    <li key={idx++}>{todo}</li>
+                })}
+            </ul>
+            <div>{`type: ${note.type}`}</div>
+        </div>
+    }
+    if (note.type === 'audio') {
+        return <div className="note-card flex" key={note.id}>
+            <div>{`type: ${note.type}`}</div>
+        </div>
+    }
+    if (note.type === 'canvas') {
+        return <div className="note-card flex" key={note.id}>
+
+            <div>{`type: ${note.type}`}</div>
+        </div>
+    }
+    if (note.type === 'map') {
+        return <div className="note-card flex" key={note.id}>
+            <div>{`type: ${note.type}`}</div>
+        </div>
+    }
+
 }
