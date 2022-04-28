@@ -4,20 +4,30 @@ import { utilService } from '../../../services/util.service.js'
 export const emailService = {
     getById,
     query,
-    remove
+    remove,
+    readingEmail
 
 }
 
 const KEY = 'emailsDB'
 
 
-function query() {
+function query(filterBy) {
     let emails = _loadFromStorage()
     if (!emails) {
         emails = _creatEmails()
         _saveToStorage(emails)
     }
-    console.log(emails)
+
+    if (filterBy) {
+        let { search, isRead } = filterBy
+        emails = emails.filter(email => {
+            return email.body.toLowerCase().includes(search.toLowerCase()) ||
+                email.subject.toLowerCase().includes(search.toLowerCase()) &&
+            email.isRead === isRead
+        }
+        )
+    }
     return Promise.resolve(emails)
 }
 
@@ -28,6 +38,14 @@ const criteria = {
     isRead: false, // (optional property, if missing: show all)
     isStared: false, // (optional property, if missing: show all)
     lables: ['important', 'romantic'] // has any of the labels
+}
+
+function readingEmail(emailId){
+    return getById(emailId).then(email => {
+        email.isRead = true
+        _update(email)
+        return Promise.resolve(email)
+    })
 }
 
 
@@ -70,11 +88,11 @@ function _creatEmails() {
 function _creatEmail() {
     const email = {
         id: utilService.makeId(),
-        subject: 'Miss you!',
+        subject: utilService.makeId(),
         // body: 'Would love to catch up sometimes',
-        body: utilService.makeId(),
+        body: utilService.makeLorem(),
         isRead: false,
-        sentAt: Date.now(),
+        sentAt: 1551133930594,
         to: 'momo@momo.com'
     }
     return email
