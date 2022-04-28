@@ -7,7 +7,7 @@ export function NotePreview({ note }) {
     if (note.type === 'txt') {
         return <div className="note-card flex" key={note.id}>
             <p>{note.desc}</p>
-            <div>{`type: ${note.type}`}</div>
+            <div className={note.type}>{`type: ${note.type}`}</div>
         </div>
     }
     if (note.type === 'img') {
@@ -25,8 +25,12 @@ export function NotePreview({ note }) {
     if (note.type === 'todo') {
         return <div className="note-card flex" key={note.id}>
             <ul>
-                {note.info.todo.map(todo => {
-                    <li key={idx++}>{todo}</li>
+                {note.info.todo.map((todo, i) => {
+                    return <li key={i} className="flex">
+                        <label
+                            className={i}
+                        >*{todo.txt}</label>
+                    </li>
                 })}
             </ul>
             <div>{`type: ${note.type}`}</div>

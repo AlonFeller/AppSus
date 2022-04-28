@@ -99,7 +99,7 @@ function _createNote(type) {
     }
     if (type === 'todo') {
         note.info = {
-            todo: [{ txt: "Driving license", doneAt: null },
+            todos: [{ txt: "Driving license", doneAt: null },
                 { txt: "Coding power", doneAt: 187111111 }
             ]
 
