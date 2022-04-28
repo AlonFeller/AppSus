@@ -7,17 +7,19 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    margin: 0 30px;
 }
 
 .note-card {
     height: fit-content;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     width: 250px;
-    background-color: rgb(255, 227, 142);
+    /* background-color: rgba(255, 227, 142, 0); */
     padding: 5px;
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
     border-radius: 5px;
-    border: 2px solid rgba(0, 0, 0, 0.161);
-    box-shadow: inset -2px -8px 25px -4px rgba(0, 0, 0, 0.329);
+    border: 2px solid rgba(0, 0, 0, 0.327);
+    /* box-shadow: inset -2px -8px 25px -4px rgba(0, 0, 0, 0.329); */
 }

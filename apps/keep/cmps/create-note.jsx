@@ -1,6 +1,6 @@
 import { NoteService } from "../services/note.service";
 
-export class NoteEdit extends React.Component {
+export class CreateNote extends React.Component {
     tate = {
         note: {
             id: utilService.makeId(),
