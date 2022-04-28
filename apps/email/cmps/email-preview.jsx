@@ -10,12 +10,12 @@ export function EmailPreview({ email, onReadingEmail }) {
                 <button class="starred-btn">star</button>
                 <button class="read-btn">read/unread</button>
             </div>
-            <div>To: {email.to}</div>
+            <div class="flex justify-cnter align-center">To: {email.to}</div>
             <div class="message-container">
                 <div className="mail-subject"><LongTxt txt={email.subject} chars={25} /></div>
                 <div className="mail-message"><LongTxt txt={email.body} chars={70} /></div>
             </div>
-            <div>{email.sentAt}</div>
+            <div class="flex justify-cnter align-center">{email.sentAt}</div>
         </div>
     </article>
 
