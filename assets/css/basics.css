@@ -36,7 +36,7 @@ nav {
 }
 
 nav :hover {
-    box-shadow: inset 0px -26px 12px -20px var(--color2);
+    /* box-shadow: inset 0px -26px 12px -20px var(--color2); */
 }
 
 .app {
@@ -58,4 +58,23 @@ footer {
     height: 3vh;
     background-color: var(--color3);
     text-align: center;
+}
+
+nav a {
+    color: var(--color2);
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0px;
+    margin: 0px;
+    transition: 0.2s;
+}
+
+nav :hover {
+    color: var(--color1);
+    transform: scale(1.2);
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0px;
+    margin: 0px;
 }
