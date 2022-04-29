@@ -7,7 +7,7 @@ export const NoteService = {
     saveKeep: saveNote,
     remove,
     getTypes,
-    getNextNoteId
+    pin
 }
 
 const KEY = 'notesDB'
@@ -23,24 +23,16 @@ function query(filterBy) {
     }
 
     if (filterBy) {
-        let { type, minSpeed, maxSpeed } = filterBy
-        if (!minSpeed) minSpeed = 0;
-        if (!maxSpeed) maxSpeed = Infinity
-        Notes = Notes.filter(Note =>
-            Note.type.includes(type) &&
-            Note.speed <= maxSpeed &&
-            Note.speed >= minSpeed)
+        let { search } = filterBy
+        Notes = Notes.filter(note => {
+            return note.type.toLowerCase().includes(search.toLowerCase()) ||
+                (note.desc && note.desc.toLowerCase().includes(search.toLowerCase()))
+        })
     }
 
     return Promise.resolve(Notes)
 }
 
-function getNextNoteId(noteId) {
-    const notes = _loadFromStorage()
-    const noteIdx = notes.findIndex(note => noteId === note.id)
-    const nextNoteIdx = (noteIdx + 1 === notes.length) ? 0 : noteIdx + 1
-    return notes[nextNoteIdx].id
-}
 
 function getById(NoteId) {
     const notes = _loadFromStorage()
@@ -48,31 +40,26 @@ function getById(NoteId) {
     return Promise.resolve(note)
 }
 
-function remove(noteId) {
+function remove({ note }) {
     let notes = _loadFromStorage()
-    notes = notes.filter(note => note.id !== noteId)
+    let noteId = note.id
+    notes = notes.filter(note, noteId => noteId !== noteId)
     _saveToStorage(notes)
     return Promise.resolve()
+}
+
+function pin(noteId) {
+    let note = getById(noteId)
+    note.isPinned = (!note.isPinned) ? true : false
+    _update(note)
+    console.log(note);
+    return Promise.resolve()
+
 }
 
 function saveNote(note) {
     if (note.id) return _update(note)
     else return _add(note)
-}
-
-function _add(noteToAdd) {
-    let notes = _loadFromStorage()
-    const note = _createCar(noteToAdd.type, noteToAdd.speed)
-    notes = [note, ...notes]
-    _saveToStorage(notes)
-    return Promise.resolve()
-}
-
-function _update(noteToUpdate) {
-    let notes = _loadFromStorage()
-    notes = notes.map(note => note.id === noteToUpdate.id ? noteToUpdate : note)
-    _saveToStorage(notes)
-    return Promise.resolve()
 }
 
 function getTypes() {
@@ -84,6 +71,16 @@ function _createNote(type) {
         id: utilService.makeId(),
         type,
         isPinned: (utilService.getRandomIntInclusive(0, 10) > 5) ? true : false,
+        desc: null,
+        info: {
+            url: null,
+            title: null,
+            todos: [{
+                txt: null,
+                doneAt: null,
+                isChecked: false
+            }]
+        }
 
     }
     if (type === 'txt') note.desc = utilService.makeLorem(25)
@@ -101,14 +98,28 @@ function _createNote(type) {
     }
     if (type === 'todo') {
         note.info = {
-            todos: [{ txt: "Driving license", doneAt: null },
-                { txt: "Coding power", doneAt: 187111111 }
+            todos: [{ txt: "Driving license", doneAt: null, isChecked: false },
+                { txt: "Coding power", doneAt: 187111111, isChecked: false }
             ]
 
         }
     }
-
     return note
+}
+
+function _add(noteToAdd) {
+    let notes = _loadFromStorage()
+    const note = _createCar(noteToAdd.type, noteToAdd.speed)
+    notes = [note, ...notes]
+    _saveToStorage(notes)
+    return Promise.resolve()
+}
+
+function _update(noteToUpdate) {
+    let notes = _loadFromStorage()
+    notes = notes.map(note => note.id === noteToUpdate.id ? noteToUpdate : note)
+    _saveToStorage(notes)
+    return Promise.resolve()
 }
 
 function _createNotes() {
@@ -117,7 +128,6 @@ function _createNotes() {
         const type = gTypes[utilService.getRandomIntInclusive(0, gTypes.length - 1)]
         notes.push(_createNote(type))
     }
-    console.table(notes);
     return notes
 }
 
