@@ -1,4 +1,5 @@
 import { NoteService } from '../services/note.service.js'
+let pin=NoteService.pin
 
 export function NotePreview({ note }) {
     if (note.type === 'txt') {
@@ -29,7 +30,7 @@ export function NotePreview({ note }) {
                 })}            </ul>
             <span>{`type: ${note.type}`}</span>
             <span className="btn delete">🗑️</span>
-            <span className="btn pin" onClick={NoteService.pin(note.id)}>📌</span>
+            <span className="btn pin" onClick={pin(note.id)}>📌</span>
 
         </div>
     }
