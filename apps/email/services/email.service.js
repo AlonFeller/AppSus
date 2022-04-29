@@ -25,8 +25,8 @@ function query(filterBy) {
             return email.body.toLowerCase().includes(search.toLowerCase()) ||
                 email.subject.toLowerCase().includes(search.toLowerCase()) ||
                 email.to.toLowerCase().includes(search.toLowerCase())
-                 &&
-            email.isRead === isRead
+                &&
+                email.isRead === isRead
         }
         )
     }
@@ -42,7 +42,7 @@ const criteria = {
     lables: ['important', 'romantic'] // has any of the labels
 }
 
-function readingEmail(emailId){
+function readingEmail(emailId) {
     return getById(emailId).then(email => {
         email.isRead = true
         _update(email)
