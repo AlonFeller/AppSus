@@ -23,13 +23,11 @@ function query(filterBy) {
     }
 
     if (filterBy) {
-        let { type, minSpeed, maxSpeed } = filterBy
-        if (!minSpeed) minSpeed = 0;
-        if (!maxSpeed) maxSpeed = Infinity
-        Notes = Notes.filter(Note =>
-            Note.type.includes(type) &&
-            Note.speed <= maxSpeed &&
-            Note.speed >= minSpeed)
+        let { search } = filterBy
+        Notes = Notes.filter(note => {
+            return note.type.toLowerCase().includes(search.toLowerCase()) ||
+                (note.desc && note.desc.toLowerCase().includes(search.toLowerCase()))
+        })
     }
 
     return Promise.resolve(Notes)
@@ -60,21 +58,6 @@ function saveNote(note) {
     else return _add(note)
 }
 
-function _add(noteToAdd) {
-    let notes = _loadFromStorage()
-    const note = _createCar(noteToAdd.type, noteToAdd.speed)
-    notes = [note, ...notes]
-    _saveToStorage(notes)
-    return Promise.resolve()
-}
-
-function _update(noteToUpdate) {
-    let notes = _loadFromStorage()
-    notes = notes.map(note => note.id === noteToUpdate.id ? noteToUpdate : note)
-    _saveToStorage(notes)
-    return Promise.resolve()
-}
-
 function getTypes() {
     return gTypes
 }
@@ -84,6 +67,16 @@ function _createNote(type) {
         id: utilService.makeId(),
         type,
         isPinned: (utilService.getRandomIntInclusive(0, 10) > 5) ? true : false,
+        desc: null,
+        info: {
+            url: null,
+            title: null,
+            todos: [{
+                txt: null,
+                doneAt: null,
+                isChecked: false
+            }]
+        }
 
     }
     if (type === 'txt') note.desc = utilService.makeLorem(25)
@@ -101,14 +94,28 @@ function _createNote(type) {
     }
     if (type === 'todo') {
         note.info = {
-            todos: [{ txt: "Driving license", doneAt: null },
-                { txt: "Coding power", doneAt: 187111111 }
+            todos: [{ txt: "Driving license", doneAt: null, isChecked: false },
+                { txt: "Coding power", doneAt: 187111111, isChecked: false }
             ]
 
         }
     }
-
     return note
+}
+
+function _add(noteToAdd) {
+    let notes = _loadFromStorage()
+    const note = _createCar(noteToAdd.type, noteToAdd.speed)
+    notes = [note, ...notes]
+    _saveToStorage(notes)
+    return Promise.resolve()
+}
+
+function _update(noteToUpdate) {
+    let notes = _loadFromStorage()
+    notes = notes.map(note => note.id === noteToUpdate.id ? noteToUpdate : note)
+    _saveToStorage(notes)
+    return Promise.resolve()
 }
 
 function _createNotes() {

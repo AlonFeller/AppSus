@@ -2,8 +2,6 @@ const { Link } = ReactRouterDOM
 
 
 export function NotePreview({ note }) {
-    // console.log(note);
-    let idx = 0;
     if (note.type === 'txt') {
         return <div className="note-card flex" key={note.id}>
             <p>{note.desc}</p>

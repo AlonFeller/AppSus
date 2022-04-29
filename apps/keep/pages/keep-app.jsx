@@ -14,13 +14,12 @@ export class KeepApp extends React.Component {
 
 
     componentDidMount() {
-        console.log('Im on it hold your breath');
         this.loadNotes()
     }
 
     loadNotes = () => {
-        console.log('just hold on');
-        NoteService.query(this.state.filterBy)
+        const { filterBy } = this.state
+        NoteService.query(filterBy)
             .then(notes => this.setState({ notes }))
     }
 
@@ -30,10 +29,8 @@ export class KeepApp extends React.Component {
 
     render() {
         const { notes } = this.state
-        console.log(notes);
-        console.log('well ? you happy now?');
         return <section className="keep-app">
-            <h1>there's nothing here go away</h1>
+            <NoteFilter onSetFilter={this.onSetFilter} />
             {/* <CreateNote onAddNote={this.onAddNote} /> */}
             <section className="notes-container">
                 {notes.map(note => <NotePreview note={note} key={note.id} />)}
