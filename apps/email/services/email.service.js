@@ -94,6 +94,7 @@ function _creatEmail() {
         // body: 'Would love to catch up sometimes',
         body: utilService.makeLorem(),
         isRead: false,
+        isStared: false,
         sentAt: new Date().toLocaleDateString(),
         to: 'momo@momo.com'
     }

@@ -3,13 +3,15 @@ import { EmailList } from '../cmps/email-list.jsx'
 import { EmailFilter } from '../cmps/email-filter.jsx'
 import { EmailDetails } from '../pages/email-details.jsx'
 import { EmailFolderList } from '../cmps/email-folder-list.jsx'
+import { ComposeEmail } from '../cmps/email-compose.jsx'
 
 
 export class EmailApp extends React.Component {
 
     state = {
         emails: [],
-        filterBy: null
+        filterBy: null,
+        isCompose: false
     }
 
     componentDidMount() {
@@ -42,6 +44,7 @@ export class EmailApp extends React.Component {
             <section className="mails-container">
                 <EmailList emails={this.state.emails} />
             </section>
+            {/* {isCompose && <ComposeEmail isCompose={isCompose}/> } */}
         </section>
 
     }
