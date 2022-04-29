@@ -11,11 +11,16 @@ export class EmailApp extends React.Component {
     state = {
         emails: [],
         filterBy: null,
-        isCompose: false
+        isCompose: true,
+        unReadCounter: 0,
     }
 
     componentDidMount() {
         this.loadEmails()
+    }
+
+    emailsCounter = () => {
+        return this.state.unReadCounter;
     }
 
     loadEmails = () => {
@@ -30,21 +35,26 @@ export class EmailApp extends React.Component {
         })
     }
 
-    onReadingEmail = (emailId) => {
-        const { filterBy } = this.state
-        emailService.readingEmail(emailId)
-            .then(() => emailService.query(filterBy)
-                .then(emails => this.setState({ emails })))
+    toggleIsCompose = () => {
+        this.setState({ isCompose: !this.state.isCompose })
     }
 
+    // onReadingEmail = (emailId) => {
+    //     const { filterBy } = this.state
+    //     emailService.readingEmail(emailId)
+    //         .then(() => emailService.query(filterBy)
+    //             .then(emails => this.setState({ emails })))
+    // }
+
     render() {
+        const { isCompose } = this.state
         return <section className="email-app">
             <EmailFilter onSetFilter={this.onSetFilter} />
             <EmailFolderList />
             <section className="mails-container">
                 <EmailList emails={this.state.emails} />
             </section>
-            {/* {isCompose && <ComposeEmail isCompose={isCompose}/> } */}
+            {isCompose && <ComposeEmail isCompose={isCompose} />}
         </section>
 
     }
