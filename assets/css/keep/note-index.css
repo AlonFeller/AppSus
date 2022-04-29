@@ -41,3 +41,8 @@
     justify-items: center;
     align-self: center;
 }
+
+.note-card span .btn {
+    justify-items: end;
+    align-self: center;
+}
