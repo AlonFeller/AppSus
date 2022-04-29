@@ -24,9 +24,11 @@ function query(filterBy) {
         emails = emails.filter(email => {
             return email.body.toLowerCase().includes(search.toLowerCase()) ||
                 email.subject.toLowerCase().includes(search.toLowerCase()) ||
-                email.to.toLowerCase().includes(search.toLowerCase()) &&
+                email.to.toLowerCase().includes(search.toLowerCase())
+                &&
                 email.isRead === isRead
-        })
+        }
+        )
     }
     return Promise.resolve(emails)
 }

@@ -1,7 +1,7 @@
 import { emailService } from '../services/email.service.js'
 import { EmailList } from '../cmps/email-list.jsx'
 import { EmailFilter } from '../cmps/email-filter.jsx'
-import { EmailDetails } from '../pages/email-details.jsx'
+import { EmailDetails } from './email-details.jsx'
 import { EmailFolderList } from '../cmps/email-folder-list.jsx'
 import { ComposeEmail } from '../cmps/email-compose.jsx'
 
