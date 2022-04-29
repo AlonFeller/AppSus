@@ -24,11 +24,9 @@ function query(filterBy) {
         emails = emails.filter(email => {
             return email.body.toLowerCase().includes(search.toLowerCase()) ||
                 email.subject.toLowerCase().includes(search.toLowerCase()) ||
-                email.to.toLowerCase().includes(search.toLowerCase())
-                 &&
-            email.isRead === isRead
-        }
-        )
+                email.to.toLowerCase().includes(search.toLowerCase()) &&
+                email.isRead === isRead
+        })
     }
     return Promise.resolve(emails)
 }
@@ -42,7 +40,7 @@ const criteria = {
     lables: ['important', 'romantic'] // has any of the labels
 }
 
-function readingEmail(emailId){
+function readingEmail(emailId) {
     return getById(emailId).then(email => {
         email.isRead = true
         _update(email)
@@ -94,7 +92,7 @@ function _creatEmail() {
         body: utilService.makeLorem(),
         isRead: false,
         isStared: false,
-        sentAt: new Date().toLocaleDateString(),
+        sentAt: utilService.getDate(),
         to: 'momo@momo.com'
     }
     return email
