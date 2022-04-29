@@ -1,6 +1,5 @@
-import { NotePreview } from './cmps/note-preview.jsx'
 import { NoteService } from '../services/note.service.js'
-
+import { eventBusService } from '../../../services/event-bus.service.js'
 
 
 export class CreateNote extends React.Component {
@@ -8,7 +7,7 @@ export class CreateNote extends React.Component {
     state = {
         note: {
             type: 'txt',
-            title: '',
+            desc: '',
             txt: '',
             url: '',
             todos: [{
@@ -17,8 +16,10 @@ export class CreateNote extends React.Component {
                 isChecked: false
             }],
             isPinned: false
-        }
+        },
+        isOpen: false
     }
+
     removeEventBus
 
     componentDidMount() {
@@ -31,8 +32,8 @@ export class CreateNote extends React.Component {
         this.removeEventBus();
     }
 
-    handleFieldChange = ({ target }) => {
-        this.setState(prevState => ({ ...prevState, fields: { ...prevState.fields, [target.name]: target.value } }))
+    handleChange = ({ target }) => {
+        this.setState(prevState => ({ ...prevState, note: { ...prevState.note, [target.name]: target.value } }))
     }
 
     onChangeType = (ev, type) => {
@@ -45,19 +46,43 @@ export class CreateNote extends React.Component {
         this.setState(prevState => ({ ...prevState, isOpen: isComposeOpen }))
     }
 
+    onCreateNote = (ev) => {
+        ev.preventDefault();
+        this.onToggleExtraFields(false);
+        NoteService.saveNote(this.state)
+            .then(() => {
+                console.log('hi');
+                this.setState(prevState => ({
+                    ...prevState, note: ({
+                        desc: '',
+                        txt: '',
+                        url: '',
+                        todos: []
+                    })
+                }))
+            })
+            .catch(err => alert(err))
+    }
+
 
     render() {
-        <section className="note-card new">
-            <input type="text"
-                name="title"
-                placeholder="Title"
-                onChange={this.handleFieldChange}
-                onFocus={() => this.onToggleExtraFields(true)}
-                className={` ${(isOpen && type !== 'todos') ? 'compose-open' : ''}`}
-                value={this.state.fields.title} />
-        
-        </section >
+        const { type, isOpen } = this.state
+        return <form className="new-note" onSubmit={(ev) => { this.onCreateNote(ev) }}>
+            <div className="compose-preview flex column">
+                <div className="compose-types flex">
+                </div>
+                <textarea name="desc" cols="35" rows="5" placeholder="Type here"
+                    onChange={this.handleChange}
+                    onFocus={() => this.onToggleExtraFields(true)}
+                    >
+                        {/* value={this.state.fields.title} */}
+                </textarea>
+            </div>
 
+            <div className='flex column extra-fields'>
+                <button className="notes-primary-btn">Create</button>
+            </div>
+        </form >
     }
 
 }

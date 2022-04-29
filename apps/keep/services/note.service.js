@@ -4,7 +4,7 @@ import { utilService } from '../../../services/util.service.js'
 export const NoteService = {
     getById,
     query,
-    saveKeep: saveNote,
+    saveNote,
     remove,
     getTypes,
     pin
@@ -57,21 +57,51 @@ function pin(noteId) {
 
 }
 
-function saveNote(note) {
-    if (note.id) return _update(note)
-    else return _add(note)
+function saveNote({ note }) {
+    console.log(note);
+    if (note.id) {
+        _update(note)
+    } else _add(note)
+    return query()
 }
 
 function getTypes() {
     return gTypes
 }
 
-function _createNote(type) {
-    let note = {
+function _createNote(note) {
+    console.log(note);
+    if (note.id) {
+        note.id = utilService.makeId()
+        console.log(note);
+        if (note.desc.includes('jpg')) {
+            note.info = {
+                url: note.desc,
+            }
+            note.type = 'img'
+        }
+        if (note.desc.includes('url')) {
+            note.info = {
+                url: note.desc,
+            }
+            newNote.type = 'video'
+        }
+        if (note.desc.includes('todo')) {
+            note.info = {
+                todos: [{ txt: utilService.makeLorem(2), doneAt: utilService.getDate(), isChecked: false },
+                    { txt: utilService.makeLorem(2), doneAt: utilService.getDate(), isChecked: false }
+                ]
+
+            }
+            note.type = 'todo'
+        }
+        return note
+    }
+    let newNote = {
         id: utilService.makeId(),
-        type,
+        type: 'txt',
         doneAt: utilService.getDate(),
-        isPinned: (utilService.getRandomIntInclusive(0, 10) > 5) ? true : false,
+        isPinned: false,
         desc: null,
         info: {
             url: null,
@@ -82,35 +112,35 @@ function _createNote(type) {
                 isChecked: false
             }]
         }
-
     }
-    if (type === 'txt') note.desc = utilService.makeLorem(25)
-    if (type === 'img') {
-        note.info = {
+    if (newNote.type === 'txt') newNote.desc = utilService.makeLorem(25)
+    if (newNote.type === 'img') {
+        newNote.info = {
             url: `../../../assets/img/${utilService.getRandomIntInclusive(1, 15)}.jpg`,
             title: utilService.makeLorem(3)
         }
     }
-    if (type === 'video') {
-        note.info = {
+    if (newNote.type === 'video') {
+        newNote.info = {
             url: "https://www.youtube.com/embed/yLTnRPoP2OM",
             title: "YouTube video player"
         }
     }
-    if (type === 'todo') {
-        note.info = {
+    if (newNote.type === 'todo') {
+        newNote.info = {
             todos: [{ txt: utilService.makeLorem(3), doneAt: utilService.getDate(), isChecked: false },
                 { txt: utilService.makeLorem(3), doneAt: utilService.getDate(), isChecked: false }
             ]
 
         }
     }
-    return note
+    return newNote
 }
 
 function _add(noteToAdd) {
+    console.log(noteToAdd);
     let notes = _loadFromStorage()
-    const note = _createCar(noteToAdd.type, noteToAdd.speed)
+    const note = _createNote(noteToAdd)
     notes = [note, ...notes]
     _saveToStorage(notes)
     return Promise.resolve()

@@ -13,6 +13,7 @@ body {
     font-style: normal;
     font-variant: normal;
     text-transform: none;
+    border-bottom: 5px solid var(--color4);
 }
 
 header {

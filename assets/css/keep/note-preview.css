@@ -4,8 +4,16 @@
     height: 200px;
 }
 
-.note-preview .img-container {
-    max-width: 250px;
+.img-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.note-card ul li {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .btn {

@@ -37,6 +37,7 @@ export class KeepApp extends React.Component {
     render() {
         const { notes } = this.state
         return <section className="keep-app">
+            <CreateNote/>
             <NoteFilter onSetFilter={this.onSetFilter} />
             {/* <CreateNote onAddNote={this.onAddNote} /> */}
             <section className="notes-container">
