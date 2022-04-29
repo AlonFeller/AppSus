@@ -4,7 +4,7 @@ import { utilService } from '../../../services/util.service.js'
 export const emailService = {
     getById,
     query,
-    remove,
+    removeEmail,
     readingEmail
 
 }
@@ -57,14 +57,14 @@ function getById(emailId) {
     return Promise.resolve(email)
 }
 
-function remove(emailId) {
+function removeEmail(emailId) {
     let emails = _loadFromStorage()
     emails = emails.filter(email => email.id !== emailId)
     _saveToStorage(emails)
     return Promise.resolve()
 }
 
-function _add(emailToAdd) {
+function _addEmail(emailToAdd) {
     let emails = _loadFromStorage()
     const email = _creatEmail()
     emails = [email, ...emails]
@@ -91,7 +91,6 @@ function _creatEmail() {
     const email = {
         id: utilService.makeId(),
         subject: utilService.makeId(),
-        // body: 'Would love to catch up sometimes',
         body: utilService.makeLorem(),
         isRead: false,
         isStared: false,

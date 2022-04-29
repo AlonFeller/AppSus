@@ -11,8 +11,9 @@ export class EmailFolderList extends React.Component {
 
     render() {
         return <section className="email-folder-list">
+            <button className="mail-compose-btn " onClick={() => this.props.toggleIsCompose()} >+ Compose</button>
             <ul>
-                <li className="mail-inbox-btn">Inbox</li>
+                <li className="mail-inbox-btn">Inbox  ({this.props.unReadCounter})</li>
                 <li className="mail-sent-btn">Sent</li>
                 <li className="mail-starred-btn">Starred</li>
                 <li className="mail-trash-btn">Trash</li>
