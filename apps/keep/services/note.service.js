@@ -7,7 +7,7 @@ export const NoteService = {
     saveKeep: saveNote,
     remove,
     getTypes,
-    getNextNoteId
+    pin
 }
 
 const KEY = 'notesDB'
@@ -33,12 +33,6 @@ function query(filterBy) {
     return Promise.resolve(Notes)
 }
 
-function getNextNoteId(noteId) {
-    const notes = _loadFromStorage()
-    const noteIdx = notes.findIndex(note => noteId === note.id)
-    const nextNoteIdx = (noteIdx + 1 === notes.length) ? 0 : noteIdx + 1
-    return notes[nextNoteIdx].id
-}
 
 function getById(NoteId) {
     const notes = _loadFromStorage()
@@ -46,11 +40,21 @@ function getById(NoteId) {
     return Promise.resolve(note)
 }
 
-function remove(noteId) {
+function remove({ note }) {
     let notes = _loadFromStorage()
-    notes = notes.filter(note => note.id !== noteId)
+    let noteId = note.id
+    notes = notes.filter(note, noteId => noteId !== noteId)
     _saveToStorage(notes)
     return Promise.resolve()
+}
+
+function pin(noteId) {
+    let note = getById(noteId)
+    note.isPinned = (!note.isPinned) ? true : false
+    _update(note)
+    console.log(note);
+    return Promise.resolve()
+
 }
 
 function saveNote(note) {
@@ -124,7 +128,6 @@ function _createNotes() {
         const type = gTypes[utilService.getRandomIntInclusive(0, gTypes.length - 1)]
         notes.push(_createNote(type))
     }
-    console.table(notes);
     return notes
 }
 

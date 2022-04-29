@@ -7,3 +7,11 @@
 .note-preview .img-container {
     max-width: 250px;
 }
+
+.btn {
+    justify-content: end;
+    justify-self: end;
+    height: 20px;
+    width: 20px;
+    margin: 5px;
+}

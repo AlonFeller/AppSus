@@ -27,6 +27,15 @@ export class KeepApp extends React.Component {
         this.setState({ filterBy }, this.loadNotes)
     }
 
+    onDeleteNote = (noteId) => {
+        NoteService.remove(noteId)
+        this.props.loadNotes()
+    }
+
+    onPinNote =(noteId) => {
+        
+    }
+
     render() {
         const { notes } = this.state
         return <section className="keep-app">
