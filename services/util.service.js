@@ -6,6 +6,7 @@ export const utilService = {
     padNum,
     getDayName,
     getMonthName,
+    getDate
 }
 
 function makeId(length = 6) {
@@ -59,4 +60,8 @@ function getMonthName(date) {
         "July", "August", "September", "October", "November", "December"
     ]
     return monthNames[date.getMonth()]
+}
+
+function getDate() {
+    return new Date().toLocaleDateString()
 }

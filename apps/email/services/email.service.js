@@ -94,7 +94,7 @@ function _creatEmail() {
         body: utilService.makeLorem(),
         isRead: false,
         isStared: false,
-        sentAt: new Date().toLocaleDateString(),
+        sentAt: utilService.getDate(),
         to: 'momo@momo.com'
     }
     return email

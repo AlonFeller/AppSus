@@ -70,6 +70,7 @@ function _createNote(type) {
     let note = {
         id: utilService.makeId(),
         type,
+        doneAt: utilService.getDate(),
         isPinned: (utilService.getRandomIntInclusive(0, 10) > 5) ? true : false,
         desc: null,
         info: {
@@ -86,7 +87,7 @@ function _createNote(type) {
     if (type === 'txt') note.desc = utilService.makeLorem(25)
     if (type === 'img') {
         note.info = {
-            url: `../../../assets/img/${utilService.getRandomIntInclusive(1, 5)}.jpg`,
+            url: `../../../assets/img/${utilService.getRandomIntInclusive(1, 15)}.jpg`,
             title: utilService.makeLorem(3)
         }
     }
@@ -98,8 +99,8 @@ function _createNote(type) {
     }
     if (type === 'todo') {
         note.info = {
-            todos: [{ txt: "Driving license", doneAt: null, isChecked: false },
-                { txt: "Coding power", doneAt: 187111111, isChecked: false }
+            todos: [{ txt: utilService.makeLorem(3), doneAt: utilService.getDate(), isChecked: false },
+                { txt: utilService.makeLorem(3), doneAt: utilService.getDate(), isChecked: false }
             ]
 
         }
@@ -124,7 +125,7 @@ function _update(noteToUpdate) {
 
 function _createNotes() {
     const notes = []
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 35; i++) {
         const type = gTypes[utilService.getRandomIntInclusive(0, gTypes.length - 1)]
         notes.push(_createNote(type))
     }
