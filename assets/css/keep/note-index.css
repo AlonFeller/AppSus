@@ -43,6 +43,7 @@
 }
 
 .note-card span .btn {
+    cursor: pointer;
     justify-items: end;
     align-self: center;
 }

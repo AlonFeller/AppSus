@@ -1,43 +1,29 @@
 import { NoteService } from '../services/note.service.js'
-let pin=NoteService.pin
+
 
 export function NotePreview({ note }) {
-    if (note.type === 'txt') {
-        return <div className="note-card flex" key={note.id}>
-            <p>{note.desc}</p>
-            <span className={note.type}>{`type: ${note.type}`}</span>
-            <span className="btn delete">🗑️</span>
-            <span className="btn pin">📌</span>
-        </div>
-    }
-    if (note.type === 'img') {
-        return <div className="note-card flex" key={note.id}>
-            <img src={note.info.url} />
-            <span>{`type: ${note.type}`}</span>
-            <span className="btn delete">🗑️</span>
-            <span className="btn pin">📌</span>
-        </div>
-    }
-    if (note.type === 'todo') {
-        return <div className="note-card flex left" key={note.id}>
-            <ul>
-                {note.info.todos.map((todo, i) => {
-                    return <li key={i} className="flex">
-                        <label
-                            className={i}
-                        >*{todo.txt}</label>
-                    </li>
-                })}            </ul>
-            <span>{`type: ${note.type}`}</span>
-            <span className="btn delete">🗑️</span>
-            <span className="btn pin" onClick={pin(note.id)}>📌</span>
 
-        </div>
-    }
+
+    return <div className="note-card flex" key={note.id}>
+        {note.type === 'txt' && <p>{note.desc}</p>}
+        {note.type === 'img' && <img src={note.info.url} />}
+        {note.type === 'todo' && <ul>
+            {note.info.todos.map((todo, i) => {
+                return <li key={i} className="flex">
+                    <label
+                        className={i}
+                    >*{todo.txt}</label>
+                </li>
+            })}
+        </ul>}
+        <span className={note.type}>{`type: ${note.type}`}</span>
+        <span className="btn delete">🗑️</span>
+        <span className="btn pin">📌</span>
+    </div>
 
     //btns
-    // <button onclick={onDeleteNote(note.id)}>🗑️</button>
-    // <button onclick={onPinNote(note.id)}>📌</button>
+    {/* <span className="btn delete" onclick={onDeleteNote(note.id)}>🗑️</span>
+        <span className="btn pin" onClick={onPinNote(note.id)}>📌</span> */}
 
     //more notes support
     // if (note.type === 'video') {
