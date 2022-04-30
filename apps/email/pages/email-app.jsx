@@ -29,7 +29,7 @@ export class EmailApp extends React.Component {
     }
 
     getUnreadEmails = (emails) => {
-        
+
     }
 
     loadEmails = () => {
@@ -72,10 +72,10 @@ export class EmailApp extends React.Component {
         this.setState({ emails: newState, selectedEmailIndex: idx })
     }
 
-    onRemoveMailtoTrash = (e,idx) => {
+    onRemoveMailtoTrash = (e,id) => {
         e.stopPropagation();
-        const newState = this.state.emails.map((email, index) =>
-            index === idx ? { ...email, isTrash: true } : email
+        const newState = this.state.emails.map(email =>
+            email.id === id ? { ...email, isTrash: true } : email
         )
         this.setState({ emails: newState }, function() {
             const filteredState = this.displayEmails(this.state.emails);

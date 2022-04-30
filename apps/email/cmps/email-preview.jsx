@@ -8,7 +8,7 @@ export function EmailPreview({ email, onOpenMail, idx, onRemoveMailtoTrash, onTo
         <article className="email-preview" onClick={() => onOpenMail(idx)}>
             <div className={`email-preview-msg ${(email.isRead) ? 'read' : ''}`}>
                 <div className="btns flex">
-                    <button className="fas fa-trash-alt fa-lg trash-btn flex justify-center align-center" onClick={(e) => onRemoveMailtoTrash(e, idx)}></button>
+                    <button className="fas fa-trash-alt fa-lg trash-btn flex justify-center align-center" onClick={(e) => onRemoveMailtoTrash(e, email.id)}></button>
                     <button className={`${(email.isStarred) ? 'fas' : 'far'} fa-star fa-lg clear-button starred-btn flex justify-center align-center`} onClick={(e) => onToggleIsStarred(e,email.id)}></button>
                     <button className={`fas fa-envelope${(email.isRead) ? '-open' : ''} fa-lg clear-button read-btn flex justify-center align-center`} onClick={(e) => onToggleIsRead(e,email.id)}></button>
                 </div>
