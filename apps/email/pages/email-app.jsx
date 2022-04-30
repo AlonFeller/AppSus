@@ -5,7 +5,7 @@ import { EmailDetails } from './email-details.jsx'
 import { EmailFolderList } from '../cmps/email-folder-list.jsx'
 import { ComposeEmail } from '../cmps/email-compose.jsx'
 
-// const { Route, Switch } = ReactRouterDOM
+const { Route, Switch } = ReactRouterDOM
 
 export class EmailApp extends React.Component {
 
@@ -14,7 +14,8 @@ export class EmailApp extends React.Component {
         filterBy: null,
         isCompose: true,
         isOpen: false,
-        selectedStatus: 'inbox'
+        selectedStatus: 'inbox',
+        selectedEmailIndex: null
         // inbox / sent / trash/ draft/ starred
     }
 
@@ -63,8 +64,12 @@ export class EmailApp extends React.Component {
         const newState = this.state.emails.map((email, index) =>
             index === idx ? { ...email, isRead: true } : email
         )
-        this.setState({ emails: newState })
+        this.setState({ emails: newState, selectedEmailIndex: idx })
         console.log(newState)
+    }
+
+    onCloseMail = () => {
+        this.setState({ selectedEmailIndex: null })
     }
 
     // onReadingEmail = (emailId) => {
@@ -101,12 +106,16 @@ export class EmailApp extends React.Component {
 
 
     render() {
-        const { isCompose } = this.state
+        const { isCompose, emails, selectedEmailIndex } = this.state
+        console.log(emails, selectedEmailIndex)
         return <section className="email-app">
             <EmailFilter onSetFilter={this.onSetFilter} />
             <EmailFolderList onSetStatus={this.onSetStatus} />
             <section className="mails-container">
-                <EmailList onOpenMail={this.onOpenMail} emails={this.state.emails} />
+                {!selectedEmailIndex && selectedEmailIndex !== 0 ? <EmailList onOpenMail={this.onOpenMail} emails={emails} /> : null}
+                <Switch>
+                    <Route path="/email/:id" render={() => <EmailDetails email={emails[selectedEmailIndex]} onCloseMail={this.onCloseMail} />} />
+                </Switch>
             </section>
             {isCompose && <ComposeEmail isCompose={isCompose} />}
         </section>
