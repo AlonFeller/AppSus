@@ -34,3 +34,9 @@
     font-weight: unset;
     background-color: var(--color4);
 }
+
+.mails-container {
+    padding: 0 15px;
+    text-align: left;
+    background-color: var(--color1);
+}
