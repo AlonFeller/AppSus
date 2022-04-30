@@ -40,10 +40,9 @@ function getById(NoteId) {
     return Promise.resolve(note)
 }
 
-function remove({ note }) {
+function remove(noteId) {
     let notes = _loadFromStorage()
-    let noteId = note.id
-    notes = notes.filter(note, noteId => noteId !== noteId)
+    notes = notes.filter((note) => note.id !== noteId)
     _saveToStorage(notes)
     return Promise.resolve()
 }
@@ -52,7 +51,6 @@ function pin(noteId) {
     let note = getById(noteId)
     note.isPinned = (!note.isPinned) ? true : false
     _update(note)
-    console.log(note);
     return Promise.resolve()
 
 }
@@ -101,7 +99,7 @@ function _createNote(note) {
     if (!(typeof note === {})) {
         let newNote = {
             id: utilService.makeId(),
-            type: gTypes[utilService.getRandomIntInclusive(0, gTypes.length - 1)],
+            type: note,
             doneAt: utilService.getDate(),
             isPinned: false,
             desc: null,
