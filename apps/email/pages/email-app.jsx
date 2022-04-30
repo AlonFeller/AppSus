@@ -5,6 +5,7 @@ import { EmailDetails } from './email-details.jsx'
 import { EmailFolderList } from '../cmps/email-folder-list.jsx'
 import { ComposeEmail } from '../cmps/email-compose.jsx'
 
+// const { Route, Switch } = ReactRouterDOM
 
 export class EmailApp extends React.Component {
 
@@ -12,7 +13,9 @@ export class EmailApp extends React.Component {
         emails: [],
         filterBy: null,
         isCompose: true,
-        unReadCounter: 0,
+        isOpen: false,
+        selectedStatus: 'inbox'
+        // inbox / sent / trash/ draft/ starred
     }
 
     componentDidMount() {
@@ -26,7 +29,14 @@ export class EmailApp extends React.Component {
     loadEmails = () => {
         const { filterBy } = this.state
         emailService.query(filterBy)
-            .then(emails => this.setState({ emails }))
+            .then(emails => {
+                let filteredEmailsByStatus = this.displayEmails(emails)
+                this.setState({
+                    emails: filteredEmailsByStatus
+                })
+            })
+        // .then(emails => this.displayEmails({ emails }))
+        // .then(emails => this.setState({ emails }))
     }
 
     onSetFilter = (filterBy) => {
@@ -35,8 +45,26 @@ export class EmailApp extends React.Component {
         })
     }
 
+    onSetStatus = (selectedStatus) => {
+        this.setState({ selectedStatus }, () => {
+            this.loadEmails()
+        })
+    }
+
+    onSelectStatus = (selectedStatus) => {
+        this.setState((prevState) => ({ ...prevState, selectedStatus }))
+    }
+
     toggleIsCompose = () => {
         this.setState({ isCompose: !this.state.isCompose })
+    }
+
+    onOpenMail = (idx) => {
+        const newState = this.state.emails.map((email, index) =>
+            index === idx ? { ...email, isRead: true } : email
+        )
+        this.setState({ emails: newState })
+        console.log(newState)
     }
 
     // onReadingEmail = (emailId) => {
@@ -46,16 +74,45 @@ export class EmailApp extends React.Component {
     //             .then(emails => this.setState({ emails })))
     // }
 
+    displayEmails = (emails) => {
+        if (!emails) return []
+        let { selectedStatus } = this.state
+        // if (!selectedStatus) selectedStatus = 'inbox'
+        const UserMail = emailService.getUserMail()
+        switch (selectedStatus) {
+            case 'inbox':
+                emails = emails.filter(email => (email.to.toLowerCase() === UserMail && !email.isTrash));
+                break;
+            case 'starred':
+                emails = emails.filter(email => (email.isStarred && !email.isTrash));
+                break;
+            case 'sent':
+                emails = emails.filter(email => (email.to.toLowerCase() !== UserMail && !email.isTrash && !email.isDraft));
+                break;
+            case 'trash':
+                emails = emails.filter(email => (email.isTrash));
+                break;
+            case 'draft':
+                emails = emails.filter(email => (email.isDraft && !email.isTrash));
+                break;
+        }
+        return emails
+    }
+
+
     render() {
         const { isCompose } = this.state
         return <section className="email-app">
             <EmailFilter onSetFilter={this.onSetFilter} />
-            <EmailFolderList />
+            <EmailFolderList onSetStatus={this.onSetStatus} />
             <section className="mails-container">
-                <EmailList emails={this.state.emails} />
+                <EmailList onOpenMail={this.onOpenMail} emails={this.state.emails} />
             </section>
             {isCompose && <ComposeEmail isCompose={isCompose} />}
         </section>
 
     }
 }
+
+
+

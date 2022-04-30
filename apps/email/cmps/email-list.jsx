@@ -1,7 +1,7 @@
 import { EmailPreview } from './email-preview.jsx'
 
-export function EmailList({ emails }) {
+export function EmailList({ emails,onOpenMail }) {
     return <section className="email-list">
-        {emails.map(email => <EmailPreview email={email} key={email.id} />)}
+        {emails.map((email, idx) => <EmailPreview idx={idx} onOpenMail={onOpenMail} email={email} key={email.id} />)}
     </section>
 }

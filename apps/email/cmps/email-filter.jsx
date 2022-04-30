@@ -4,6 +4,7 @@ export class EmailFilter extends React.Component {
         filterBy: {
             search: '',
             isRead: false,
+            sortBy: 'to'
         }
     }
 
@@ -28,6 +29,12 @@ export class EmailFilter extends React.Component {
                     <option>Read</option>
                     <option>Unread</option>
                 </select>
+
+                <select className="sort-by">
+                    <option>Subject</option>
+                    <option>Date</option>
+                </select>
+
             </form>
         </section>
     }
