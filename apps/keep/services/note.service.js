@@ -71,10 +71,11 @@ function getTypes() {
 
 function _createNote(note) {
     console.log(note);
-    if (note.id) {
+    if (typeof note === {}) {
+        console.log('im working on it');
         note.id = utilService.makeId()
-        console.log(note);
         if (note.desc.includes('jpg')) {
+            console.log("working on an image here");
             note.info = {
                 url: note.desc,
             }
@@ -97,44 +98,46 @@ function _createNote(note) {
         }
         return note
     }
-    let newNote = {
-        id: utilService.makeId(),
-        type: 'txt',
-        doneAt: utilService.getDate(),
-        isPinned: false,
-        desc: null,
-        info: {
-            url: null,
-            title: null,
-            todos: [{
-                txt: null,
-                doneAt: null,
-                isChecked: false
-            }]
+    if (!(typeof note === {})) {
+        let newNote = {
+            id: utilService.makeId(),
+            type: gTypes[utilService.getRandomIntInclusive(0, gTypes.length - 1)],
+            doneAt: utilService.getDate(),
+            isPinned: false,
+            desc: null,
+            info: {
+                url: null,
+                title: null,
+                todos: [{
+                    txt: null,
+                    doneAt: null,
+                    isChecked: false
+                }]
+            }
         }
-    }
-    if (newNote.type === 'txt') newNote.desc = utilService.makeLorem(25)
-    if (newNote.type === 'img') {
-        newNote.info = {
-            url: `../../../assets/img/${utilService.getRandomIntInclusive(1, 15)}.jpg`,
-            title: utilService.makeLorem(3)
+        if (newNote.type === 'txt') newNote.desc = utilService.makeLorem(25)
+        if (newNote.type === 'img') {
+            newNote.info = {
+                url: `../../../assets/img/${utilService.getRandomIntInclusive(1, 15)}.jpg`,
+                title: utilService.makeLorem(3)
+            }
         }
-    }
-    if (newNote.type === 'video') {
-        newNote.info = {
-            url: "https://www.youtube.com/embed/yLTnRPoP2OM",
-            title: "YouTube video player"
+        if (newNote.type === 'video') {
+            newNote.info = {
+                url: "https://www.youtube.com/embed/yLTnRPoP2OM",
+                title: "YouTube video player"
+            }
         }
-    }
-    if (newNote.type === 'todo') {
-        newNote.info = {
-            todos: [{ txt: utilService.makeLorem(3), doneAt: utilService.getDate(), isChecked: false },
-                { txt: utilService.makeLorem(3), doneAt: utilService.getDate(), isChecked: false }
-            ]
+        if (newNote.type === 'todo') {
+            newNote.info = {
+                todos: [{ txt: utilService.makeLorem(3), doneAt: utilService.getDate(), isChecked: false },
+                    { txt: utilService.makeLorem(3), doneAt: utilService.getDate(), isChecked: false }
+                ]
 
+            }
         }
+        return newNote
     }
-    return newNote
 }
 
 function _add(noteToAdd) {
