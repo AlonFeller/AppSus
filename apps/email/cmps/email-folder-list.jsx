@@ -7,7 +7,6 @@ export class EmailFolderList extends React.Component {
         unReadCounter: 0
     }
 
-
     // componentDidMount() {
     //     this.onUpdateReadCount()
     //     this.removeEventBus = eventBusService.on('update-read-count', this.onUpdateReadCount)

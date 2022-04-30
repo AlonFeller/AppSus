@@ -252,6 +252,7 @@ function _creatEmails() {
 function _creatEmail() {
     const email = {
         id: utilService.makeId(),
+        from:'user@appsus.com',
         to: 'momo@momo.com',
         subject: utilService.makeId(),
         body: utilService.makeLorem(),

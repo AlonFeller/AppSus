@@ -6,7 +6,7 @@ const { Link } = ReactRouterDOM
 export function EmailPreview({ email, onOpenMail, idx }) {
     return <Link to={`/email/${email.id}`}>
         <article className="email-preview" onClick={() => onOpenMail(idx)}>
-            <div className="email-preview-msg" >
+            <div className={`email-preview-msg ${(email.isRead) ? 'read' : '' }`}>
                 <div className="btns flex">
                     <button className="trash-btn flex justify-center align-center">delete</button>
                     <button className="starred-btn flex justify-center align-center">star</button>

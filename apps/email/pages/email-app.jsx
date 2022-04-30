@@ -16,7 +16,6 @@ export class EmailApp extends React.Component {
         isOpen: false,
         selectedStatus: 'inbox',
         selectedEmailIndex: null
-        // inbox / sent / trash/ draft/ starred
     }
 
     componentDidMount() {
@@ -36,8 +35,6 @@ export class EmailApp extends React.Component {
                     emails: filteredEmailsByStatus
                 })
             })
-        // .then(emails => this.displayEmails({ emails }))
-        // .then(emails => this.setState({ emails }))
     }
 
     onSetFilter = (filterBy) => {
@@ -72,17 +69,9 @@ export class EmailApp extends React.Component {
         this.setState({ selectedEmailIndex: null })
     }
 
-    // onReadingEmail = (emailId) => {
-    //     const { filterBy } = this.state
-    //     emailService.readingEmail(emailId)
-    //         .then(() => emailService.query(filterBy)
-    //             .then(emails => this.setState({ emails })))
-    // }
-
     displayEmails = (emails) => {
         if (!emails) return []
         let { selectedStatus } = this.state
-        // if (!selectedStatus) selectedStatus = 'inbox'
         const UserMail = emailService.getUserMail()
         switch (selectedStatus) {
             case 'inbox':
