@@ -4,31 +4,16 @@ import { eventBusService } from '../../../services/event-bus.service.js'
 export class EmailFolderList extends React.Component {
 
     state = {
-        unReadCounter: 0
+        // unReadCounter: 0
     }
 
-    // componentDidMount() {
-    //     this.onUpdateReadCount()
-    //     this.removeEventBus = eventBusService.on('update-read-count', this.onUpdateReadCount)
-    // }
-
-    // componentWillUnmount() {
-    //     this.removeEventBus();
-    // }
-    
-    // onUpdateReadCount = () => {
-    //     EmailService.unreadCounter()
-    //     .then((unReadCounter) => {
-    //         this.setState({ unReadCounter })
-    //     })
-    // }
 
     render() {
         const { unReadCounter } = this.state
         return <section className="email-folder-list">
             <button className="mail-compose-btn " onClick={() => this.props.toggleIsCompose()} >+ Compose</button>
             <ul>
-                <li className="mail-inbox-btn" onClick= {() => this.props.onSetStatus('inbox')} > Inbox  </li>
+                <li className="mail-inbox-btn" onClick= {() => this.props.onSetStatus('inbox')} > Inbox  ({unReadCounter})</li>
                 <li className="mail-sent-btn" onClick= {() => this.props.onSetStatus('sent')}> Sent</li>
                 <li className="mail-starred-btn" onClick= {() => this.props.onSetStatus('starred')}>Starred</li>
                 <li className="mail-trash-btn" onClick= {() => this.props.onSetStatus('trash')}>Trash</li>
@@ -40,7 +25,6 @@ export class EmailFolderList extends React.Component {
 }
 
 
-// ({unReadCounter})
 
 
 

@@ -15,9 +15,6 @@
 }
 
 .email-preview-msg {
-    /* display: flex; */
-    /* justify-content: space-between;
-    align-items: center; */
     box-sizing: border-box;
     height: 70px;
     display: grid;
@@ -28,6 +25,14 @@
     background-color: var(--color5);
     border: 0.5px solid var(--color3);
     cursor: pointer;
+    text-decoration: none;
+    color: black;
+
+}
+
+.email-preview-msg *{
+    text-decoration: none;
+    color: black;
 }
 
 .read {
@@ -40,3 +45,7 @@
     text-align: left;
     background-color: var(--color1);
 }
+
+.fas.fa-star {
+    color: gold;
+  }

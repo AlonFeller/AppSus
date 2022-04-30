@@ -90,7 +90,7 @@ const gEmails = [
         isStarred: false,
         isTrash: false,
         isDraft: false,
-        isSent: false
+        isSent: true
     },
     {
         id: utilService.makeId(),
@@ -103,7 +103,7 @@ const gEmails = [
         isStarred: false,
         isTrash: false,
         isDraft: false,
-        isSent: false
+        isSent: true
     },
     {
         id: utilService.makeId(),
@@ -116,7 +116,7 @@ const gEmails = [
         isStarred: false,
         isTrash: false,
         isDraft: false,
-        isSent: false
+        isSent: true
     },
     {
         id: utilService.makeId(),
@@ -129,7 +129,7 @@ const gEmails = [
         isStarred: false,
         isTrash: false,
         isDraft: false,
-        isSent: false
+        isSent: true
     },
     {
         id: utilService.makeId(),
@@ -142,7 +142,7 @@ const gEmails = [
         isStarred: false,
         isTrash: false,
         isDraft: false,
-        isSent: false
+        isSent: true
     }
 ]
 
@@ -155,9 +155,9 @@ function query(filterBy) {
     let emails = _loadFromStorage()
     if (!emails) {
         emails = _creatEmails()
-        console.log(emails)
         _saveToStorage(emails)
     }
+
 
     if (filterBy) {
         let { search, isRead } = filterBy
@@ -170,20 +170,13 @@ function query(filterBy) {
         }
         )
     }
+
     return Promise.resolve(emails)
 }
 
 
 function getUserMail() {
     return gLoggedinUser.email
-}
-
-const criteria = {
-    status: 'inbox/sent/trash/draft',
-    txt: 'puki', // no need to support complex text search
-    isRead: false, // (optional property, if missing: show all)
-    isStared: false, // (optional property, if missing: show all)
-    lables: ['important', 'romantic'] // has any of the labels
 }
 
 function readingEmail(emailId) {
@@ -193,7 +186,6 @@ function readingEmail(emailId) {
         return Promise.resolve(email)
     })
 }
-
 
 function getById(emailId) {
     const emails = _loadFromStorage()
