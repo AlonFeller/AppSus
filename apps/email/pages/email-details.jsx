@@ -3,9 +3,7 @@ const { Link } = ReactRouterDOM
 export function EmailDetails({ email, onCloseMail }) {
     if (!email) return null
     return <article className="email-preview" >
-        <Link to="/email" onClick={() => onCloseMail()}>
-            back
-        </Link>
+
         <ul>
             <li>From : Me</li>
             <li>To : {email.to}</li>
@@ -15,6 +13,9 @@ export function EmailDetails({ email, onCloseMail }) {
         <div className="mail-container">
             <p>the body msg: {email.body}</p>
         </div>
+        <Link to="/email" onClick={() => onCloseMail()}>
+            back
+        </Link>
     </article>
 
 }
