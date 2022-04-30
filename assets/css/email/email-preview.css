@@ -1,51 +1,65 @@
-.email-preview :hover {
-    background-color: var(--color1);
-}
-
-.email-preview .message-container {
-    grid-column: 3, 4;
-    display: grid;
-    grid-template-columns: 1fr 5fr;
-    grid-template-rows: 1fr;
-}
-
-.mail-message,
-.mail-subject {
-    text-align: left;
-}
-
-.email-preview-msg {
-    box-sizing: border-box;
-    height: 70px;
-    display: grid;
-    grid-template-columns: 1fr 2fr 6fr 1fr;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 0 10px;
-    background-color: var(--color5);
-    border: 0.5px solid var(--color3);
-    cursor: pointer;
-    text-decoration: none;
-    color: black;
-
-}
-
-.email-preview-msg *{
-    text-decoration: none;
-    color: black;
-}
-
-.read {
-    font-weight: unset;
-    background-color: var(--color4);
-}
-
-.mails-container {
-    padding: 0 15px;
-    text-align: left;
-    background-color: var(--color1);
-}
-
-.fas.fa-star {
-    color: gold;
-  }
+    .email-preview :hover {
+        background-color: var(--color1);
+    }
+    
+    .email-preview .message-container {
+        grid-column: 3, 4;
+        display: grid;
+        grid-template-columns: 1fr 5fr;
+        grid-template-rows: 1fr;
+    }
+    
+    .mail-message,
+    .mail-subject {
+        text-align: left;
+    }
+    
+    .email-preview-msg {
+        box-sizing: border-box;
+        height: 70px;
+        display: grid;
+        grid-template-columns: 1fr 2fr 6fr 1fr;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 0 10px;
+        background-color: var(--color5);
+        border: 0.5px solid var(--color3);
+        cursor: pointer;
+        text-decoration: none;
+        color: black;
+    }
+    
+    .email-preview-msg * {
+        text-decoration: none;
+        color: black;
+    }
+    
+    .read {
+        font-weight: unset;
+        background-color: var(--color4);
+    }
+    
+    .email-app .mails-container {
+        background-color: var(--color1);
+        grid-column: 2, -1;
+        grid-row: 2, -2;
+    }
+    
+    .fas.fa-star {
+        color: gold;
+    }
+    
+    .mails-container .email-preview ul li {
+        font-weight: bold;
+    }
+    
+    .mails-container .email-preview ul li,
+    .mail-container {
+        padding: 0 15px;
+        text-align: left;
+    }
+    
+    .email-app .email-compose-container {
+        grid-column: 1, -1;
+        grid-row: 3, -4;
+    }
