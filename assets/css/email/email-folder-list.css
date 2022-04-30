@@ -30,3 +30,17 @@
     color: var(--color1);
     /* background-color: var(--color1); */
 }
+
+.btns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.btns button {
+    height: 20px;
+    width: fit-content;
+    align-items: center;
+    justify-content: baseline;
+}
