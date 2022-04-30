@@ -5,17 +5,157 @@ export const emailService = {
     getById,
     query,
     removeEmail,
-    readingEmail
+    readingEmail,
+    getUserMail,
+    unreadCounter
 
 }
 
 const KEY = 'emailsDB'
 
+const gEmails = [
+    {
+        id: utilService.makeId(),
+        from:'momo@momo.com' , 
+        to: 'user@appsus.com',
+        subject: utilService.makeId(),
+        body: utilService.makeLorem(),
+        sentAt: utilService.getDate(),
+        isRead: false,
+        isStarred: false,
+        isTrash: false,
+        isDraft: false,
+        isSent: false
+    },
+    {
+        id: utilService.makeId(),
+        from:'bobo@momo.com' , 
+        to: 'user@appsus.com',
+        subject: utilService.makeId(),
+        body: utilService.makeLorem(),
+        sentAt: utilService.getDate(),
+        isRead: false,
+        isStarred: false,
+        isTrash: false,
+        isDraft: false,
+        isSent: false
+    },
+    {
+        id: utilService.makeId(),
+        from:'koko@momo.com' , 
+        to: 'user@appsus.com',
+        subject: utilService.makeId(),
+        body: utilService.makeLorem(),
+        sentAt: utilService.getDate(),
+        isRead: false,
+        isStarred: false,
+        isTrash: false,
+        isDraft: false,
+        isSent: false
+    },
+    {
+        id: utilService.makeId(),
+        from:'muki@momo.com' , 
+        to: 'user@appsus.com',
+        subject: utilService.makeId(),
+        body: utilService.makeLorem(),
+        sentAt: utilService.getDate(),
+        isRead: false,
+        isStarred: false,
+        isTrash: false,
+        isDraft: false,
+        isSent: false
+    },
+    {
+        id: utilService.makeId(),
+        from:'puki@momo.com' , 
+        to: 'user@appsus.com',
+        subject: utilService.makeId(),
+        body: utilService.makeLorem(),
+        sentAt: utilService.getDate(),
+        isRead: false,
+        isStarred: false,
+        isTrash: false,
+        isDraft: false,
+        isSent: false
+    },
+    {
+        id: utilService.makeId(),
+        from:'user@appsus.com' , 
+        to: 'puki@puki.com',
+        subject: utilService.makeId(),
+        body: utilService.makeLorem(),
+        sentAt: utilService.getDate(),
+        isRead: false,
+        isStarred: false,
+        isTrash: false,
+        isDraft: false,
+        isSent: false
+    },
+    {
+        id: utilService.makeId(),
+        from:'user@appsus.com' , 
+        to: 'muki@muki.com',
+        subject: utilService.makeId(),
+        body: utilService.makeLorem(),
+        sentAt: utilService.getDate(),
+        isRead: false,
+        isStarred: false,
+        isTrash: false,
+        isDraft: false,
+        isSent: false
+    },
+    {
+        id: utilService.makeId(),
+        from:'user@appsus.com' , 
+        to: 'shuki@shuki.com',
+        subject: utilService.makeId(),
+        body: utilService.makeLorem(),
+        sentAt: utilService.getDate(),
+        isRead: false,
+        isStarred: false,
+        isTrash: false,
+        isDraft: false,
+        isSent: false
+    },
+    {
+        id: utilService.makeId(),
+        from:'user@appsus.com' , 
+        to: 'bubi@bubi.com',
+        subject: utilService.makeId(),
+        body: utilService.makeLorem(),
+        sentAt: utilService.getDate(),
+        isRead: false,
+        isStarred: false,
+        isTrash: false,
+        isDraft: false,
+        isSent: false
+    },
+    {
+        id: utilService.makeId(),
+        from:'user@appsus.com' , 
+        to: 'tester@tester.com',
+        subject: utilService.makeId(),
+        body: utilService.makeLorem(),
+        sentAt: utilService.getDate(),
+        isRead: false,
+        isStarred: false,
+        isTrash: false,
+        isDraft: false,
+        isSent: false
+    }
+]
+
+const gLoggedinUser = {
+    email: 'user@appsus.com',
+    fullname: 'Mahatma Appsus'
+}
 
 function query(filterBy) {
     let emails = _loadFromStorage()
     if (!emails) {
         emails = _creatEmails()
+        console.log(emails)
         _saveToStorage(emails)
     }
 
@@ -33,6 +173,10 @@ function query(filterBy) {
     return Promise.resolve(emails)
 }
 
+
+function getUserMail() {
+    return gLoggedinUser.email
+}
 
 const criteria = {
     status: 'inbox/sent/trash/draft',
@@ -58,10 +202,27 @@ function getById(emailId) {
 }
 
 function removeEmail(emailId) {
-    let emails = _loadFromStorage()
-    emails = emails.filter(email => email.id !== emailId)
-    _saveToStorage(emails)
-    return Promise.resolve()
+    if (!email.isTrash) {
+        email.isTrash = true
+        updateMail(email)
+        return Promise.resolve()
+    } else {
+        let emails = _loadFromStorage()
+        emails = emails.filter(email => email.id !== emailId)
+        _saveToStorage(emails)
+        return Promise.resolve()
+    }
+}
+
+function unreadCounter() {
+    const emails = _loadFromStorage()
+    let unReadCounter = 0
+    emails.forEach(email => {
+        if (!email.isTrashed && !email.isRead && email.to === gLoggedinUser.email) {
+            unReadCounter++
+        }
+    })
+    return Promise.resolve(unReadCounter)
 }
 
 function _addEmail(emailToAdd) {
@@ -72,6 +233,7 @@ function _addEmail(emailToAdd) {
     return Promise.resolve()
 }
 
+
 function _update(emailToUpdate) {
     let emails = _loadFromStorage()
     emails = emails.map(email => email.id === emailToUpdate.id ? emailToUpdate : email)
@@ -81,8 +243,8 @@ function _update(emailToUpdate) {
 
 function _creatEmails() {
     const emails = []
-    for (let i = 0; i < 5; i++) {
-        emails.push(_creatEmail(i))
+    for (let i = 0; i < gEmails.length; i++) {
+        emails.push(gEmails[i])
     }
     return emails
 }
@@ -90,12 +252,15 @@ function _creatEmails() {
 function _creatEmail() {
     const email = {
         id: utilService.makeId(),
+        to: 'momo@momo.com',
         subject: utilService.makeId(),
         body: utilService.makeLorem(),
-        isRead: false,
-        isStared: false,
         sentAt: utilService.getDate(),
-        to: 'momo@momo.com'
+        isRead: false,
+        isStarred: false,
+        isTrash: false,
+        isDraft: false,
+        isSent: false
     }
     return email
 }
@@ -108,8 +273,3 @@ function _loadFromStorage() {
     return storageService.loadFromStorage(KEY)
 }
 
-
-// const loggedinUser = {
-//     email: 'user@appsus.com',
-//     fullname: 'Mahatma Appsus'
-// }

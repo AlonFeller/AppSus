@@ -1,8 +1,7 @@
 const { Link } = ReactRouterDOM
 
-export function EmailPreview({ email }) {
-    return <Link to={`/email/${email.id}`}>
-        <article className="email-preview" >
+export function EmailDetails({ email }) {
+    return <article className="email-preview" >
             <ul>
                 <li>From : Me</li>
                 <li>To : {email.to}</li>
@@ -13,5 +12,5 @@ export function EmailPreview({ email }) {
                 <p>the body msg: {email.body}</p>
             </div>
         </article>
-    </Link>
+
 }

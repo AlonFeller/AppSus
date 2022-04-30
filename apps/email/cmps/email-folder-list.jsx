@@ -1,23 +1,39 @@
+import { EmailService } from '../services/email.service.js'
+import { eventBusService } from '../../../services/event-bus.service.js'
+
 export class EmailFolderList extends React.Component {
 
     state = {
-        selectedStatus: 'inbox'
-        // inbox / sent / trash/ draft/ starred
+        unReadCounter: 0
     }
 
-    onSelectStatus = (selectedStatus) => {
-        this.setState((prevState) => ({ ...prevState, selectedStatus }))
-    }
+
+    // componentDidMount() {
+    //     this.onUpdateReadCount()
+    //     this.removeEventBus = eventBusService.on('update-read-count', this.onUpdateReadCount)
+    // }
+
+    // componentWillUnmount() {
+    //     this.removeEventBus();
+    // }
+    
+    // onUpdateReadCount = () => {
+    //     EmailService.unreadCounter()
+    //     .then((unReadCounter) => {
+    //         this.setState({ unReadCounter })
+    //     })
+    // }
 
     render() {
+        const { unReadCounter } = this.state
         return <section className="email-folder-list">
             <button className="mail-compose-btn " onClick={() => this.props.toggleIsCompose()} >+ Compose</button>
             <ul>
-                <li className="mail-inbox-btn">Inbox  ({this.props.unReadCounter})</li>
-                <li className="mail-sent-btn">Sent</li>
-                <li className="mail-starred-btn">Starred</li>
-                <li className="mail-trash-btn">Trash</li>
-                <li className="mail-drafts-btn">Drafts</li>
+                <li className="mail-inbox-btn" onClick= {() => this.props.onSetStatus('inbox')} > Inbox  </li>
+                <li className="mail-sent-btn" onClick= {() => this.props.onSetStatus('sent')}> Sent</li>
+                <li className="mail-starred-btn" onClick= {() => this.props.onSetStatus('starred')}>Starred</li>
+                <li className="mail-trash-btn" onClick= {() => this.props.onSetStatus('trash')}>Trash</li>
+                <li className="mail-drafts-btn" onClick= {() => this.props.onSetStatus('drafts')}>Drafts</li>
             </ul>
 
         </section>
@@ -25,12 +41,10 @@ export class EmailFolderList extends React.Component {
 }
 
 
+// ({unReadCounter})
 
 
 
 
 
 
-
-
-// ({this.props.unReadCounter})
