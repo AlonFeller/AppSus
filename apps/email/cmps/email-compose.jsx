@@ -16,13 +16,14 @@ export class ComposeEmail extends React.Component {
         this.setState({ [prop]: val })
     }
 
-    onSendMail = (ev) => {
+    onSendEmail = (ev) => {
         const newEmail = {
             to: this.state.to,
             subject: this.state.subject,
-            body: this.state.message
+            body: this.state.body
         }
-        this.props.createNewEmail(newEmail).then(() => {
+        console.log(newEmail)
+        this.props.addEmail(newEmail).then(() => {
             this.clearFields();
             this.props.toggleIsCompose();
         })
@@ -36,7 +37,7 @@ export class ComposeEmail extends React.Component {
                     <div className="compose-title">New Message<button onClick={() => this.props.toggleIsCompose()}>X</button></div>
                     <div className="exit-btn"></div>
                 </header>
-                <form id="compose" className="message-container flex column" onSubmit={this.onSendMail}>
+                <form id="compose" className="message-container flex column" onSubmit={this.onSendEmail}>
                     <label>To&nbsp;
                         <input type="email" name="to" value={this.state.to} placeholder="user@momo.com" required
                             onChange={this.handleChange}
