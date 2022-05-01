@@ -154,7 +154,7 @@ function _createNotes() {
         isPinned: false,
         desc: null,
         info: {
-            url: `../../../assets/img/4.jpg`,
+            url: `https://codinginfinite.com/wp-content/uploads/2019/05/maxresdefault-1.jpg`,
             title: null,
             todos: [{
                 txt: null,
@@ -169,7 +169,7 @@ function _createNotes() {
         isPinned: false,
         desc: null,
         info: {
-            url: `../../../assets/img/2.jpg`,
+            url: `https://ih1.redbubble.net/image.875111905.4798/flat,750x,075,f-pad,750x1000,f8f8f8.jpg`,
             title: null,
             todos: [{
                 txt: null,
@@ -184,7 +184,7 @@ function _createNotes() {
         isPinned: false,
         desc: null,
         info: {
-            url: `../../../assets/img/10.jpg`,
+            url: `https://cdn2.outdoorphotographer.com/2021/03/when-to-use-black-and-white-sa903460.jpg`,
             title: null,
             todos: [{
                 txt: null,
@@ -199,7 +199,7 @@ function _createNotes() {
         isPinned: false,
         desc: null,
         info: {
-            url: `../../../assets/img/2.jpg`,
+            url: `https://webneel.com/daily/sites/default/files/images/daily/08-2018/1-nature-photography-spring-season-mumtazshamsee.jpg`,
             title: null,
             todos: [{
                 txt: null,
@@ -214,7 +214,7 @@ function _createNotes() {
         isPinned: false,
         desc: "why am i still here?",
         info: {
-            url: `../../../assets/img/12.jpg`,
+            url: `https://i.pinimg.com/736x/72/16/a7/7216a77ec1ae893b9b38b3b596f69392.jpg`,
             title: null,
             todos: [{
                 txt: null,
