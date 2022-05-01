@@ -8,13 +8,7 @@ export class CreateNote extends React.Component {
         note: {
             type: 'txt',
             desc: '',
-            txt: '',
-            url: '',
-            todos: [{
-                txt: null,
-                doneAt: null,
-                isChecked: false
-            }],
+            doneAt: '',
             isPinned: false
         },
         isOpen: false
@@ -33,7 +27,7 @@ export class CreateNote extends React.Component {
     }
 
     handleChange = ({ target }) => {
-        this.setState(prevState => ({ ...prevState, note: { ...prevState.note, [target.name]: target.value } }))
+        this.setState(prevState => ({ ...prevState, note: { ...prevState.note, desc: target.value } }))
     }
 
     onChangeType = (ev, type) => {
@@ -49,34 +43,31 @@ export class CreateNote extends React.Component {
     onCreateNote = (ev) => {
         ev.preventDefault();
         this.onToggleExtraFields(false);
-        NoteService.saveNote(this.state)
-            .then(() => {
-                console.log('hi');
-                this.setState(prevState => ({
-                    ...prevState, note: ({
-                        desc: '',
-                        txt: '',
-                        url: '',
-                        todos: []
-                    })
-                }))
+       
+        this.props.addNote(this.state.note)
+        this.setState(prevState => ({
+            ...prevState, note: ({
+                desc: '',
+                txt: '',
+                url: '',
+                todos: []
             })
-            .catch(err => alert(err))
+        }))
     }
 
 
     render() {
         const { type, isOpen } = this.state
-        return <form className="new-note" onSubmit={(ev) => { this.onCreateNote(ev) }}>
+        return <form className="new-note" onSubmit={this.onCreateNote}>
             <div className="compose-preview flex column">
                 <div className="compose-types flex">
                 </div>
-                <textarea name="desc" cols="35" rows="5" placeholder="Type here"
+                <textarea
+                    cols="35" rows="5" placeholder="Type here"
                     onChange={this.handleChange}
                     onFocus={() => this.onToggleExtraFields(true)}
-                    >
-                        {/* value={this.state.fields.title} */}
-                </textarea>
+                    value={this.state.note.desc}
+                />
             </div>
 
             <div className='flex column extra-fields'>

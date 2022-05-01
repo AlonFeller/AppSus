@@ -7,15 +7,17 @@
 /* email */
 
 @import './email/email-filter.css';
+
 /* @import './email/email-list.css'; */
+
 @import './email/email-folder-list.css';
 @import './email/email-preview.css';
 @import './email/email-index.css';
 
 /* keep */
 
+@import './keep/note-index.css';
 @import './keep/note-filter.css';
 @import './keep/note-list.css';
 @import './keep/note-preview.css';
-@import './keep/note-index.css';
 @import './keep/note-edit.css';
