@@ -10,12 +10,11 @@ const { Route, Switch } = ReactRouterDOM
 export class EmailApp extends React.Component {
 
     state = {
-        displayedEmails: [],
         emails: [],
         filterBy: null,
         isCompose: true,
         isOpen: false,
-        unReadCounter: 0,
+        isRead: false,
         selectedStatus: 'inbox',
         selectedEmailIndex: null
     }
@@ -24,24 +23,15 @@ export class EmailApp extends React.Component {
         this.loadEmails()
     }
 
-    emailsCounter = () => {
-        return this.state.unReadCounter;
-    }
-
-    getUnreadEmails = (emails) => {
-        
-    }
-
     loadEmails = () => {
-        const { filterBy } = this.state
-        emailService.query(filterBy)
+        const { filterBy, selectedStatus } = this.state
+        emailService.query(filterBy, selectedStatus)
             .then(emails => {
-                let filteredEmailsByStatus = this.displayEmails(emails);
                 this.setState({
-                    emails: emails,
-                    displayedEmails: filteredEmailsByStatus
+                    emails: emails
                 })
             })
+            emailService.unreadCounter()
     }
 
     onSetFilter = (filterBy) => {
@@ -51,14 +41,9 @@ export class EmailApp extends React.Component {
     }
 
     onSetStatus = (selectedStatus) => {
-        this.setState({ selectedStatus }, () => {
-            const filteredEmails = this.displayEmails(this.state.emails)
-            this.setState({displayedEmails: filteredEmails})
+        this.setState((prevState) => ({ ...prevState, selectedStatus }), () => {
+            this.loadEmails()
         })
-    }
-
-    onSelectStatus = (selectedStatus) => {
-        this.setState((prevState) => ({ ...prevState, selectedStatus }))
     }
 
     toggleIsCompose = () => {
@@ -72,71 +57,30 @@ export class EmailApp extends React.Component {
         this.setState({ emails: newState, selectedEmailIndex: idx })
     }
 
-    onRemoveMailtoTrash = (e,id) => {
+    onRemoveMailtoTrash = (e, id) => {
         e.stopPropagation();
-        const newState = this.state.emails.map(email =>
-            email.id === id ? { ...email, isTrash: true } : email
-        )
-        this.setState({ emails: newState }, function() {
-            const filteredState = this.displayEmails(this.state.emails);
-            this.setState({displayedEmails: filteredState})
-        });
+        emailService.RemoveMailtoTrash(id)
+            .then(this.loadEmails)
     }
 
-    onToggleIsRead = (e,id) => {
+    onToggleIsRead = (e, id) => {
         e.stopPropagation();
-        const newDisplayState = this.state.displayedEmails.map(email =>
-            email.id === id ? { ...email, isRead: !email.isRead } : email
-        )
-
-        const newEmailState = this.state.emails.map(email => 
-            email.id === id ? { ...email, isRead: !email.isRead } : email
-        )
-
-        this.setState({ emails: newEmailState, displayedEmails: newDisplayState })
+        emailService.toggleIsRead(id)
+            .then(this.loadEmails)
     }
 
-    onToggleIsStarred = (e,id) => {
+    onToggleIsStarred = (e, id) => {
         e.stopPropagation();
-        const newDisplayState = this.state.displayedEmails.map(email =>
-            email.id === id ? { ...email, isStarred: !email.isStarred } : email
-        )
-
-        const newEmailState = this.state.emails.map(email => 
-            email.id === id ? { ...email, isStarred: !email.isStarred } : email
-        )
-
-        this.setState({ emails: newEmailState, displayedEmails: newDisplayState })
+        emailService.toggleIsStarred(id)
+            .then(this.loadEmails)
     }
 
     onCloseMail = () => {
         this.setState({ selectedEmailIndex: null })
     }
 
-    displayEmails = (emails) => {
-        // console.log(emails)
-        // return emails
-        if (!emails) return []
-        let { selectedStatus } = this.state;
-        const UserMail = emailService.getUserMail();
-
-        switch (selectedStatus) {
-            case 'inbox':
-                return emails.filter(email => (email.to.toLowerCase() === UserMail && !email.isTrash));
-            case 'starred':
-                return emails.filter(email => (email.isStarred && !email.isTrash));
-            case 'sent':
-                return emails.filter(email => (email.to.toLowerCase() !== UserMail && !email.isTrash && !email.isDraft));
-            case 'trash':
-                return emails.filter(email => (email.isTrash));
-            case 'draft':
-                return emails.filter(email => (email.isDraft && !email.isTrash));
-        }
-    }
-
     render() {
-        const { isCompose, emails,displayedEmails, selectedEmailIndex } = this.state
-        // console.log(message)
+        const { isCompose, emails, selectedEmailIndex } = this.state
 
         return <section className="email-app">
             <EmailFilter onSetFilter={this.onSetFilter} />
@@ -144,7 +88,7 @@ export class EmailApp extends React.Component {
             <section className="mails-container">
                 {!selectedEmailIndex && selectedEmailIndex !== 0 ?
                     <EmailList onOpenMail={this.onOpenMail} onRemoveMailtoTrash={this.onRemoveMailtoTrash}
-                        onToggleIsRead={this.onToggleIsRead} onToggleIsStarred={this.onToggleIsStarred} emails={displayedEmails} /> : null}
+                        onToggleIsRead={this.onToggleIsRead} onToggleIsStarred={this.onToggleIsStarred} emails={emails} /> : null}
                 <Switch>
                     <Route path="/email/:id" render={() => <EmailDetails email={emails[selectedEmailIndex]} onCloseMail={this.onCloseMail} />} />
                 </Switch>
