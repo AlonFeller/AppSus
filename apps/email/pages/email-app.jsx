@@ -29,7 +29,7 @@ export class EmailApp extends React.Component {
     }
 
     getUnreadEmails = (emails) => {
-
+        
     }
 
     loadEmails = () => {
