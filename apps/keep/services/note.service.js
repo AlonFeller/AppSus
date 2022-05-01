@@ -50,16 +50,8 @@ function remove(noteId) {
 function pin(noteId) {
     const notes = _loadFromStorage()
     const note = notes.find(note => noteId === note.id)
-    let elNote = document.getElementsByClassName(noteId)
-    console.log(elNote);
-    if (!note.isPinned) {
-        note.isPinned = !note.isPinned
-        elNote.classList.add("pinned")
-
-    } else {
-        note.isPinned = !note.isPinned
-        elNote.classList.remove("pinned")
-    }
+    note.isPinned = !note.isPinned
+    _saveToStorage(notes)
     return Promise.resolve()
 }
 
@@ -73,6 +65,7 @@ function saveNote(note) {
 
 function _createNote(note) {
     note.id = utilService.makeId()
+    note.doneAt = utilService.getDate()
     if (note.desc.includes('jpg')) {
         console.log("working on an image here");
         note.info = {

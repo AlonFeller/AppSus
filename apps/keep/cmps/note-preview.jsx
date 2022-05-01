@@ -22,7 +22,7 @@ export class NotePreview extends React.Component {
 
     render() {
         const { note } = this.props
-        return <div className={`note-card flex ${note.id}`} key={note.id}>
+        return <div className={`note-card flex ${note.id} ${(note.isPinned) ? "pinned" : ""}`} key={note.id}>
             {note.type === 'txt' && <p>{note.desc}</p>}
             {note.type === 'img' && <div className="img-container"><img src={note.info.url} /></div>}
             {note.type === 'todo' && <ul>
@@ -44,9 +44,11 @@ export class NotePreview extends React.Component {
             }
             {note.type === 'audio' && <div className="note-card flex" key={note.id}>
             </div>}
-            <button className="btn delete" onClick={()=>this.props.onDeleteNote(note.id)} data-id={note.id}>🗑️</button>
-            <button className="btn pin" onClick={()=>this.props.onPinNote(note.id)}>📌</button>
-            <span className={note.doneAt}>{note.doneAt}</span>
+            <div className="controls">
+                <button className="btn delete" onClick={() => this.props.onDeleteNote(note.id)} data-id={note.id}>🗑️</button>
+                <button className="btn pin" onClick={() => this.props.onPinNote(note.id)}>📌</button>
+                <span className={note.doneAt}>{note.doneAt}</span>
+            </div>
         </div>
     }
 }

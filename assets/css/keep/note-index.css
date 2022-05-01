@@ -47,3 +47,36 @@
     justify-items: end;
     align-self: center;
 }
+
+.note-preview {
+    padding: 20px;
+    box-shadow: 0 0 10px 0 var(--color2);
+    height: 200px;
+}
+
+.img-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.note-card ul li {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    justify-content: end;
+    align-items: center;
+    justify-self: end;
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+}
+
+.pinned {
+    border: 3px solid var(--color6);
+    box-shadow: 0 5 5px var(--color1);
+    order: -1;
+}
