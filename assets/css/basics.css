@@ -24,8 +24,7 @@ header {
     display: flex;
     justify-content: space-between;
     justify-self: center;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 0 50px;
     box-shadow: inset 0px -26px 12px -20px var(--color2);
 }
 

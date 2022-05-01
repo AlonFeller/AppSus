@@ -4,12 +4,39 @@
 
 .email-app {
     width: 100%;
+    padding: 0 50px;
     height: 90vh;
     display: grid;
     grid-template-columns: 1fr 5fr;
-    grid-template-rows: 50px 1fr;
+    grid-template-rows: 50px 1fr 250px;
+    grid-template-areas: "folders filter" "folders list" "folders compose";
 }
 
-.mails-container {
-    background-color: var(--color4);
+.email-filter {
+    height: 5vh;
+    background-color: var(--color2);
+    align-items: center;
+    justify-content: center;
+    grid-area: filter;
+}
+
+.email-folder-list {
+    background-color: var(--color2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-area: folders;
+}
+
+.email-compose-container {
+    grid-area: compose;
+}
+
+.email-app .mails-container {
+    background-color: var(--color1);
+    grid-area: list;
+}
+
+textarea {
+    height: 100px;
 }

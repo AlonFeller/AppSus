@@ -39,12 +39,6 @@
         background-color: var(--color4);
     }
     
-    .email-app .mails-container {
-        background-color: var(--color1);
-        grid-column: 2, -1;
-        grid-row: 2, -2;
-    }
-    
     .fas.fa-star {
         color: gold;
     }
@@ -57,9 +51,4 @@
     .mail-container {
         padding: 0 15px;
         text-align: left;
-    }
-    
-    .email-app .email-compose-container {
-        grid-column: 1, -1;
-        grid-row: 3, -4;
     }
